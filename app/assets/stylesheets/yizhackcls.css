@@ -40,13 +40,6 @@
 	font-family: 'Courier New', Courier, monospace;
 }
 
-/*
-.button.thumb:hover {
-	background-color: lavender;
-	cursor: pointer;
-}
-*/
-
 .button.selected {
 	background-color: aquamarine;
 }

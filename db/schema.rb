@@ -11,26 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306073623) do
+ActiveRecord::Schema.define(version: 20160309075123) do
 
-  create_table "buttons", force: :cascade do |t|
-    t.integer "row"
-    t.integer "column"
-    t.string  "value"
-    t.integer "layer_id"
-    t.index ["layer_id"], name: "index_buttons_on_layer_id"
+  create_table "commits", force: :cascade do |t|
+    t.text    "data"
+    t.string  "name"
+    t.integer "keyboard_id"
+    t.index ["keyboard_id"], name: "index_commits_on_keyboard_id"
   end
 
   create_table "keyboards", force: :cascade do |t|
+    t.text    "data"
     t.string  "name"
+    t.text    "description"
     t.integer "user_id"
     t.index ["user_id"], name: "index_keyboards_on_user_id"
-  end
-
-  create_table "layers", force: :cascade do |t|
-    t.string  "name"
-    t.integer "keyboard_id"
-    t.index ["keyboard_id"], name: "index_layers_on_keyboard_id"
   end
 
   create_table "users", force: :cascade do |t|

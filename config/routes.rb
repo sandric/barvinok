@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  get 'keyboard/show'
 
-  post 'keyboard/update'
+  resources :keyboards
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/keyboards/:keyboard_id/commits', to: 'commits#index'
 
-  # Serve websocket cable requests in-process
-  # mount ActionCable.server => '/cable'
+  get '/keyboards/:keyboard_id/commits/:id', to: 'commits#show'
+
 end

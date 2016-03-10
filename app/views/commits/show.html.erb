@@ -1,0 +1,14 @@
+<h1><%= @commit.name %></h1>
+
+<div id="app">
+</div>
+
+<script src=<%= asset_path('cljs/yizhackclj.js') %> ></script>
+
+<%= javascript_tag do %>
+
+console.log(<%= raw @commit.data.to_json %>);
+
+//yizhackclj.db.deserialize_keyboard('<%= raw @commit.data.to_json %>');
+
+<% end %>
