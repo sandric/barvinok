@@ -1,7 +1,7 @@
 class KeyboardsController < ApplicationController
 
 	def index
-		@keyboards = Keyboard.all
+		@keyboards = User.first.keyboards
 	end
 
 	def new
@@ -37,6 +37,14 @@ class KeyboardsController < ApplicationController
 		else
 		    render 'edit'
 		end
+  	end
+
+
+  	def destroy
+    	@keyboard = Keyboard.find(params[:id])
+    	@keyboard.destroy
+
+    	redirect_to keyboards_path
   	end
 
 

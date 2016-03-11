@@ -2,6 +2,8 @@
 
 <ul>
 	<% @keyboards.each do |keyboard| %>
-		<li> <%= keyboard.name %> </li>
+		<li> 
+			<%= link_to keyboard.name, keyboard %> 
+		</li>
 	<% end %>
 </ul>
