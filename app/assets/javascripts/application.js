@@ -14,4 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 
+//= require marked.min
+
+//= require codemirror
+
+//= require markdown
+
 //= require_tree .
