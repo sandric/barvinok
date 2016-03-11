@@ -4,6 +4,10 @@ class KeyboardsController < ApplicationController
 		@keyboards = Keyboard.all
 	end
 
+	def new
+		@keyboard = Keyboard.new
+	end
+
 	def show
 		@keyboard = Keyboard.find(params[:id])
 	end
@@ -11,6 +15,19 @@ class KeyboardsController < ApplicationController
 	def edit
 		@keyboard = Keyboard.find(params[:id])
 	end
+
+	def create
+		@keyboard = Keyboard.new(keyboard_params)
+
+		@keyboard.user = User.first
+
+		if @keyboard.save
+			redirect_to @keyboard
+		else
+			render 'new'
+		end
+	end
+
 
 	def update
 		@keyboard = Keyboard.find(params[:id])
