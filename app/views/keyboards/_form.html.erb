@@ -1,30 +1,47 @@
 <%= form_for @keyboard do |f| %>
 
-	<%= f.text_field :name %>
-  	<%= f.text_area :description, size: "60x12" %>
-  	
   	<%= f.submit "Update" %>
 
+	<%= f.text_field :name %>
+
+	<div class="description-editing-area">
+	  	<%= f.text_area :description %>
+	  	<div id="content" class="markdown"></div>
+  	</div>
+
 <% end %>
-
-
-<div id="code">
-</div>
 
 <%= javascript_tag do %>
 
 $(document).ready(function() {
-        window.editor = CodeMirror.fromTextArea(document.getElementById("keyboard_description"), {
+        editor = CodeMirror.fromTextArea(document.getElementById("keyboard_description"), {
   			value: document.getElementById("keyboard_description").innerHTML,
   			mode:  "markdown",
-  			lineNumbers: true
+  			lineNumbers: true,
+
   		});
 
 		function updateTextArea() {
-    		window.editor.save()
+    		editor.save()
+    		document.getElementById('content').innerHTML = marked(document.getElementById("keyboard_description").value);
 		}
 
-		window.editor.on('change', updateTextArea);
+		editor.on('change', updateTextArea);
+
+
+
+		marked.setOptions({
+		  renderer: new marked.Renderer(),
+		  gfm: true,
+		  tables: true,
+		  breaks: true,
+		  pedantic: false,
+		  sanitize: false,
+		  smartLists: true,
+		  smartypants: false
+		});
+
+    	document.getElementById('content').innerHTML = marked(document.getElementById("keyboard_description").value);
     });
 
 <% end %>
