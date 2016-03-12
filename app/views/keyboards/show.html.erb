@@ -1,9 +1,9 @@
-<h1>Keyboard name: <%= @keyboard.name %></h1>
-
 <%= link_to 'Edit', edit_keyboard_path(@keyboard) %> 
 
 <%= link_to 'Delete', keyboard_path(@keyboard), method: :delete, data: { confirm: 'Are you sure?' } %>
 
+
+<h1> <%= j @keyboard.name %> </h1>
 
 <div id="content" class="markdown"></div>
 
@@ -20,5 +20,5 @@
 	  smartypants: false
 	});
 
-    document.getElementById('content').innerHTML = marked("<%= raw @keyboard.description.gsub("\r\n", "\\\r\n").gsub("\"", "\\\"") %>");
+    document.getElementById('content').innerHTML = marked("<%= j raw @keyboard.description %>");
 <% end %>
