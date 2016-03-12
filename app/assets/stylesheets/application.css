@@ -12,6 +12,8 @@
  *
 
  *= require codemirror.css
+ *= require bootstrap.min.css
+
 
  *= require_tree .
  *= require_self
