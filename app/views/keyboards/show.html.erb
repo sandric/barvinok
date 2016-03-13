@@ -2,6 +2,10 @@
 
 <%= link_to 'Delete', keyboard_path(@keyboard), method: :delete, data: { confirm: 'Are you sure?' } %>
 
+<%= link_to 'Commits', keyboard_commits_path(@keyboard) %>
+
+<%= link_to 'HEAD', keyboard_commit_path(@keyboard, @keyboard.commits.last) %>
+
 
 <h1> <%= j @keyboard.name %> </h1>
 

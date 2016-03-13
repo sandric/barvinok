@@ -1,9 +1,20 @@
 <h1>Keyboards</h1>
 
+<%= link_to 'Create new keyboard', new_keyboard_path %>
+
+
 <ul>
 	<% @keyboards.each do |keyboard| %>
 		<li> 
 			<%= link_to keyboard.name, keyboard %> 
+
+			<%= link_to 'Edit', edit_keyboard_path(keyboard) %> 
+
+			<%= link_to 'Delete', keyboard_path(keyboard), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+			<%= link_to 'Commits', keyboard_commits_path(keyboard) %>
+
+			<%= link_to 'HEAD', keyboard_commit_path(keyboard, keyboard.commits.last) %>
 		</li>
 	<% end %>
 </ul>

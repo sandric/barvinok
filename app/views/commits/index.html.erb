@@ -1,5 +1,7 @@
 <% @commits.each do |commit| %>
 	<p>
-		<%= commit.name %>
+		<%= link_to commit.name, keyboard_commit_path(commit.keyboard, commit) %>
+
+		<%= link_to 'Delete', keyboard_commit_path(commit.keyboard, commit), method: :delete, data: { confirm: 'Are you sure?' } %>
 	</p>
 <% end %>

@@ -21,6 +21,8 @@ class KeyboardsController < ApplicationController
 
 		@keyboard.user = User.first
 
+		@keyboard.commits << Commit.create(name: "Initial commit", data: "{\"layers\":[]}", keyboard: @keyboard)
+
 		if @keyboard.save
 			redirect_to @keyboard
 		else
