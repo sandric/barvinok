@@ -19,6 +19,7 @@
 //= require codemirror
 
 //= require markdown
+//= require javascript
 
 //= require cljs/yizhackclj
 
