@@ -20,4 +20,8 @@
 
 //= require markdown
 
+//= require cljs/yizhackclj
+
+
+
 //= require_tree .

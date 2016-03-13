@@ -16,14 +16,6 @@ window.editor = CodeMirror(document.getElementById("text"), {
         lineNumbers: true
       });
 
-<% end %>
-
-
-<script src=<%= asset_path('cljs/yizhackclj.js') %> ></script>
-
-
-<%= javascript_tag do %>
-
-yizhackclj.db.deserialize_keyboard(<%= raw @commit.data.to_json %>);
+yizhackclj.components.initialize(<%= raw @commit.data.to_json %>);
 
 <% end %>
