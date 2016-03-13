@@ -1,3 +1,37 @@
+
+#text {
+  visibility: hidden;
+}
+
+#text.active {
+  visibility: visible;
+}
+
+
+#text .CodeMirror {
+  height: 100%
+}
+
+.visual.active {
+  display: block;
+}
+
+.visual {
+  display: none;
+}
+
+
+.textual.active {
+  visibility: visible;
+}
+
+.textual {
+  visibility: hidden;
+}
+
+
+
+
 .layer {
   display: none;
 

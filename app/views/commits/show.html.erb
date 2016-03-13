@@ -3,12 +3,25 @@
 <div id="app">
 </div>
 
-<script src=<%= asset_path('cljs/yizhackclj.js') %> ></script>
+<div id="text">
+</div>
+
 
 <%= javascript_tag do %>
 
-console.log(<%= raw @commit.data.to_json %>);
+window.editor = CodeMirror(document.getElementById("text"), {
+        mode:  "application/ld+json",
+        lineNumbers: true
+      });
 
-//yizhackclj.db.deserialize_keyboard('<%= raw @commit.data.to_json %>');
+<% end %>
+
+
+<script src=<%= asset_path('cljs/yizhackclj.js') %> ></script>
+
+
+<%= javascript_tag do %>
+
+yizhackclj.db.deserialize_keyboard(<%= raw @commit.data.to_json %>);
 
 <% end %>
