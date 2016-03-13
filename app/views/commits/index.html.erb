@@ -1,7 +1,9 @@
+<h1> <%= @keyboard.name %> Commits:</h1>
+
 <% @commits.each do |commit| %>
 	<p>
-		<%= link_to commit.name, keyboard_commit_path(commit.keyboard, commit) %>
+		<%= link_to commit.name, keyboard_commit_path(@keyboard, commit) %>
 
-		<%= link_to 'Delete', keyboard_commit_path(commit.keyboard, commit), method: :delete, data: { confirm: 'Are you sure?' } %>
+		<%= link_to 'Delete', keyboard_commit_path(@keyboard, commit), method: :delete, data: { confirm: 'Are you sure?' } %>
 	</p>
 <% end %>
