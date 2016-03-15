@@ -1,0 +1,24 @@
+<%= link_to 'Edit', edit_keyboard_talk_path(@keyboard, @talk) %> 
+
+<%= link_to 'Delete', keyboard_talk_path(@keyboard, @talk), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+<h1> <%= j @talk.title %> </h1>
+
+<div id="content" class="markdown"></div>
+
+<%= javascript_tag do %>
+
+	marked.setOptions({
+	  renderer: new marked.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: true,
+	  pedantic: false,
+	  sanitize: false,
+	  smartLists: true,
+	  smartypants: false
+	});
+
+    document.getElementById('content').innerHTML = marked("<%= j raw @talk.data %>");
+<% end %>

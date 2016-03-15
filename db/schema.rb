@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309075123) do
+ActiveRecord::Schema.define(version: 20160313155722) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text    "data"
+    t.integer "talk_id"
+    t.integer "user_id"
+    t.index ["talk_id"], name: "index_comments_on_talk_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "commits", force: :cascade do |t|
     t.text    "data"
@@ -26,6 +34,15 @@ ActiveRecord::Schema.define(version: 20160309075123) do
     t.text    "description"
     t.integer "user_id"
     t.index ["user_id"], name: "index_keyboards_on_user_id"
+  end
+
+  create_table "talks", force: :cascade do |t|
+    t.text    "data"
+    t.string  "title"
+    t.integer "keyboard_id"
+    t.integer "user_id"
+    t.index ["keyboard_id"], name: "index_talks_on_keyboard_id"
+    t.index ["user_id"], name: "index_talks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

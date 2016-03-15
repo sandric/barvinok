@@ -1,0 +1,16 @@
+<h1>Talks for <%= @keyboard.name %> </h1>
+
+<%= link_to 'Create new talk', new_keyboard_talk_path %>
+
+<ul>
+	<% @talks.each do |talk| %>
+		<li> 
+
+			<%= link_to talk.title, keyboard_talk_path(@keyboard, talk) %> 
+
+			<%= link_to 'Edit', edit_keyboard_talk_path(@keyboard, talk) %> 
+
+			<%= link_to 'Delete', keyboard_talk_path(@keyboard, talk), method: :delete, data: { confirm: 'Are you sure?' } %>
+		</li>
+	<% end %>
+</ul>

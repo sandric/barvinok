@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user = User.create(name: "TestUser", email: "testuser@mail.com")
+user_second = User.create(name: "TestUser 2", email: "testuser2@mail.com")
 
 first_keyboard = Keyboard.create(name: "First keyboard", description: "First description", user: user)
 second_keyboard = Keyboard.create(name: "Second keyboard", description: "Second description", user: user)
@@ -22,3 +23,10 @@ first_fifth_commit = Commit.create(name: "First fifth commit", keyboard: first_k
 second_first_commit = Commit.create(name: "Second first commit", keyboard: second_keyboard, data: keyboard_json_data)
 second_second_commit = Commit.create(name: "Second second commit", keyboard: second_keyboard, data: keyboard_json_data)
 second_third_commit = Commit.create(name: "Second third commit", keyboard: second_keyboard, data: keyboard_json_data)
+
+first_talk = Talk.create(title: "first 1", data: "#OLA **1**", keyboard: first_keyboard, user: user)
+second_talk = Talk.create(title: "first 2", data: "#OLA **2**", keyboard: first_keyboard, user: user)
+third_talk = Talk.create(title: "first 3", data: "#OLA **3**", keyboard: first_keyboard, user: user_second)
+
+fourth_talk = Talk.create(title: "second 4", data: "#OLA **4**", keyboard: second_keyboard, user: user_second)
+fifth_talk = Talk.create(title: "second 5", data: "#OLA **5**", keyboard: second_keyboard, user: user)

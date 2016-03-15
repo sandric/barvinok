@@ -1,0 +1,47 @@
+<%= form_for ([@keyboard, @talk]) do |f| %>
+
+  	<%= f.submit %>
+
+	<%= f.text_field :title %>
+
+	<div class="data-editing-area">
+	  	<%= f.text_area :data %>
+	  	<div id="content" class="markdown"></div>
+  	</div>
+
+<% end %>
+
+<%= javascript_tag do %>
+
+$(document).ready(function() {
+        editor = CodeMirror.fromTextArea(document.getElementById("talk_data"), {
+  			value: document.getElementById("talk_data").innerHTML,
+  			mode:  "markdown",
+  			lineNumbers: true,
+
+  		});
+
+		function updateTextArea() {
+    		editor.save()
+    		document.getElementById('content').innerHTML = marked(document.getElementById("talk_data").value);
+		}
+
+		editor.on('change', updateTextArea);
+
+
+
+		marked.setOptions({
+		  renderer: new marked.Renderer(),
+		  gfm: true,
+		  tables: true,
+		  breaks: true,
+		  pedantic: false,
+		  sanitize: false,
+		  smartLists: true,
+		  smartypants: false
+		});
+
+    	document.getElementById('content').innerHTML = marked(document.getElementById("talk_data").value);
+    });
+
+<% end %>
