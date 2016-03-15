@@ -2,6 +2,8 @@
 
 <h2><%= @commit.name %></h2>
 
+<%= link_to 'Fork', fork_keyboard_commit_path(@keyboard, @commit), :method => :post %>
+
 <div id="app">
 </div>
 

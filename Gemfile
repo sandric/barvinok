@@ -30,6 +30,8 @@ gem 'redis', '~> 3.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'acts_as_tree'
+
 
 gem 'rack-cors', :require => 'rack/cors'
 
