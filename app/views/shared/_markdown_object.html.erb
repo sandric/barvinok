@@ -1,0 +1,10 @@
+<% className =  "markdown_#{markdown_object.class.name.downcase}" %>
+<% idName = "markdown_#{markdown_object.class.name.downcase}_#{markdown_object.id}" %>
+<% data = markdown_object.send(dataMethod) %>
+
+
+<div class="<%= className %>" id="<%= idName %>"></div>
+
+<%= javascript_tag do %>
+	document.getElementById("<%= idName %>").innerHTML = marked("<%= j raw data %>");
+<% end %>

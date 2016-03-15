@@ -30,3 +30,24 @@ third_talk = Talk.create(title: "first 3", data: "#OLA **3**", keyboard: first_k
 
 fourth_talk = Talk.create(title: "second 4", data: "#OLA **4**", keyboard: second_keyboard, user: user_second)
 fifth_talk = Talk.create(title: "second 5", data: "#OLA **5**", keyboard: second_keyboard, user: user)
+
+
+first_talk_comment_first = Comment.create(data: "First talk first", talk: first_talk, user: user_second)
+first_talk_comment_first = Comment.create(data: "First talk second", talk: first_talk, user: user)
+first_talk_comment_first = Comment.create(data: "First talk third", talk: first_talk, user: user_second)
+
+second_talk_comment_first = Comment.create(data: "second talk first", talk: second_talk, user: user_second)
+second_talk_comment_first = Comment.create(data: "second talk second", talk: second_talk, user: user)
+second_talk_comment_first = Comment.create(data: "second talk third", talk: second_talk, user: user_second)
+
+third_talk_comment_first = Comment.create(data: "third talk first", talk: third_talk, user: user_second)
+third_talk_comment_first = Comment.create(data: "third talk second", talk: third_talk, user: user)
+third_talk_comment_first = Comment.create(data: "third talk third", talk: third_talk, user: user_second)
+
+fourth_talk_comment_first = Comment.create(data: "fourth talk first", talk: fourth_talk, user: user_second)
+fourth_talk_comment_first = Comment.create(data: "fourth talk second", talk: fourth_talk, user: user)
+fourth_talk_comment_first = Comment.create(data: "fourth talk third", talk: fourth_talk, user: user_second)
+
+fifth_talk_comment_first = Comment.create(data: "fifth talk first", talk: fifth_talk, user: user_second)
+fifth_talk_comment_first = Comment.create(data: "fifth talk second", talk: fifth_talk, user: user)
+fifth_talk_comment_first = Comment.create(data: "fifth talk third", talk: fifth_talk, user: user_second)

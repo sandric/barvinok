@@ -1,0 +1,8 @@
+<%= link_to 'Edit', edit_keyboard_talk_comment_path(@keyboard, @talk, @comment) %> 
+
+<%= link_to 'Delete', keyboard_talk_comment_path(@keyboard, @talk, @comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+<div id="content" class="markdown"></div>
+
+<%= render :partial => "shared/markdown_object", object: @comment, locals: {dataMethod: :data} %>

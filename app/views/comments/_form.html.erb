@@ -1,0 +1,33 @@
+<%= form_for [@keyboard, @talk, @comment] do |f| %>
+
+  	<%= f.submit %>
+
+	<div class="data-editing-area">
+	  	<%= f.text_area :data %>
+	  	<div id="content" class="markdown"></div>
+  	</div>
+
+<% end %>
+
+<%= javascript_tag do %>
+
+$(document).ready(function() {
+        editor = CodeMirror.fromTextArea(document.getElementById("comment_data"), {
+  			value: document.getElementById("comment_data").innerHTML,
+  			mode:  "markdown",
+  			lineNumbers: true,
+
+  		});
+
+		function updateTextArea() {
+    		editor.save()
+    		document.getElementById('content').innerHTML = marked(document.getElementById("comment_data").value);
+		}
+
+		editor.on('change', updateTextArea);
+		
+
+    document.getElementById('content').innerHTML = marked(document.getElementById("comment_data").value);
+});
+
+<% end %>

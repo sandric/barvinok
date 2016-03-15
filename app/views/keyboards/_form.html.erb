@@ -29,19 +29,7 @@ $(document).ready(function() {
 		editor.on('change', updateTextArea);
 
 
-
-		marked.setOptions({
-		  renderer: new marked.Renderer(),
-		  gfm: true,
-		  tables: true,
-		  breaks: true,
-		  pedantic: false,
-		  sanitize: false,
-		  smartLists: true,
-		  smartypants: false
-		});
-
-    	document.getElementById('content').innerHTML = marked(document.getElementById("keyboard_description").value);
-    });
+    document.getElementById('content').innerHTML = marked(document.getElementById("keyboard_description").value);
+});
 
 <% end %>
