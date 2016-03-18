@@ -9,7 +9,7 @@ class LayersController < ApplicationController
 	end
 
 	def show
-		@layer = @keyboard.commits.layer(params[:id])
+		@layer = Layer.first
 
 		respond_to do |format|
            	format.json { render json: @layer.as_json}
