@@ -36,6 +36,8 @@ Rails.application.routes.draw do
         member do
           post :fork
         end
+
+        resources :layers, :param => :name, :only => [:show]
       end
       resources :talks, :only => [:index, :new, :create, :show, :edit, :update, :destroy] do
         resources :comments, :only => [:new, :create, :show, :edit, :update, :destroy]
