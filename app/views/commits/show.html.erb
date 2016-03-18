@@ -2,9 +2,9 @@
 
 <h2><%= @commit.name %></h2>
 
-<%= link_to 'Fork', fork_commit_path(@commit), :method => :post %>
+<%= link_to 'Fork', fork_user_keyboard_commit_path(@user.name, @keyboard.name, @commit), :method => :post %>
 
-<%= link_to 'Commit', keyboard_commits_path(@keyboard, @commit), :method => :post %>
+<%= link_to 'Commit', user_keyboard_commits_path(@user.name, @keyboard.name, @commit), :method => :post %>
 
 
 <div id="app">

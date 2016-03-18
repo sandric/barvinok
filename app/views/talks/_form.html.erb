@@ -1,4 +1,6 @@
-<%= form_for ([@keyboard, @talk]) do |f| %>
+<% url = @talk.id.nil? ? user_keyboard_talks_path(@user.name, @keyboard.name) : user_keyboard_talk_path(@user.name, @keyboard.name, @talk) %>
+
+<%= form_for [@user, @keyboard, @talk], url: url do |f| %>
 
   	<%= f.submit %>
 

@@ -1,4 +1,6 @@
-<%= form_for [@keyboard, @talk, @comment] do |f| %>
+<% url = @comment.id.nil? ? user_keyboard_talk_comments_path(@user.name, @keyboard.name, @talk) : user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, @comment) %>
+
+<%= form_for [@keyboard, @talk, @comment], url: url do |f| %>
 
   	<%= f.submit %>
 

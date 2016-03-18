@@ -1,6 +1,6 @@
-<%= link_to 'Edit', edit_comment_path(@comment) %> 
+<%= link_to 'Edit', edit_user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, @comment) %> 
 
-<%= link_to 'Delete', comment_path(@comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Delete', user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, @comment), method: :delete, data: { confirm: 'Are you sure?' } %>
 
 
 <div id="content" class="markdown"></div>

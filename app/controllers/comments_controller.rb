@@ -1,27 +1,41 @@
 class CommentsController < ApplicationController
 
 	def new
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
 		@talk = Talk.find(params[:talk_id])
-		@comment = Comment.new(talk: @talk)
+
+		@comment = Comment.new
 	end
 
 	def show
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+		@talk = Talk.find(params[:talk_id])
+
 		@comment = Comment.find(params[:id])
 	end
 
 	def edit
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+		@talk = Talk.find(params[:talk_id])
+
 		@comment = Comment.find(params[:id])
 	end
 
 	def create
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
 		@talk = Talk.find(params[:talk_id])
+
 		@comment = Comment.new(comment_params)
 
 		@comment.talk = @talk
-		@comment.user = User.first
+		@comment.user = @user
 
 		if @comment.save
-			redirect_to comment_path(@comment)
+			redirect_to user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, @comment)
 		else
 			render 'new'
 		end
@@ -29,10 +43,14 @@ class CommentsController < ApplicationController
 
 
 	def update
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+		@talk = Talk.find(params[:talk_id])
+
 		@comment = Comment.find(params[:id])
 
 		if @comment.update(comment_params)
-		    redirect_to comment_path(@comment)
+		    redirect_to user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, @comment)
 		else
 		    render 'edit'
 		end
@@ -40,12 +58,15 @@ class CommentsController < ApplicationController
 
 
   	def destroy
+  		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+		@talk = Talk.find(params[:talk_id])
+
     	@comment = Comment.find(params[:id])
-    	talk = @comment.talk
 
     	@comment.destroy
 
-    	redirect_to talk_path(talk)
+    	redirect_to user_keyboard_talk_path(@user.name, @keyboard.name, @talk)
   	end
 
 

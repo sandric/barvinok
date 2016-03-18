@@ -1,6 +1,8 @@
-<%= form_for [@user, @keyboard] do |f| %>
+<% url = @keyboard.id.nil? ? user_keyboards_path(@user.name) : user_keyboard_path(@user.name, @keyboard.name) %>
 
-  	<%= f.submit %>
+<%= form_for [@user, @keyboard], url: url do |f| %>
+
+  <%= f.submit %>
 
 	<%= f.text_field :name %>
 

@@ -1,32 +1,44 @@
 class TalksController < ApplicationController
 
 	def index
-		@keyboard = Keyboard.find(params[:keyboard_id])
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+
 		@talks = @keyboard.talks
 	end
 
 	def new
-		@keyboard = Keyboard.find(params[:keyboard_id])
-		@talk = Talk.new(keyboard: @keyboard)
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+
+		@talk = Talk.new
 	end
 
 	def show
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+
 		@talk = Talk.find(params[:id])
 	end
 
 	def edit
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+
 		@talk = Talk.find(params[:id])
 	end
 
 	def create
-		@keyboard = Keyboard.find(params[:keyboard_id])
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+
 		@talk = Talk.new(talk_params)
 
 		@talk.keyboard = @keyboard
-		@talk.user = User.first
+		@talk.user = @user
 
 		if @talk.save
-			redirect_to talk_path(@talk)
+			redirect_to user_keyboard_talk_path(@user.name, @keyboard.name, @talk)
 		else
 			render 'new'
 		end
@@ -34,10 +46,13 @@ class TalksController < ApplicationController
 
 
 	def update
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+
 		@talk = Talk.find(params[:id])
 
 		if @talk.update(talk_params)
-		    redirect_to talk_path(@talk)
+		    redirect_to user_keyboard_talk_path(@user.name, @keyboard.name, @talk)
 		else
 		    render 'edit'
 		end
@@ -45,12 +60,14 @@ class TalksController < ApplicationController
 
 
   	def destroy
-    	@talk = Talk.find(params[:id])
-    	keyboard = @talk.keyboard
+  		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
 
+    	@talk = Talk.find(params[:id])
+    	
     	@talk.destroy
 
-    	redirect_to keyboard_talks_path(keyboard)
+    	redirect_to user_keyboard_talks_path(@user.name, @keyboard.name)
   	end
 
 

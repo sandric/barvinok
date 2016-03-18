@@ -1,26 +1,30 @@
 class CommitsController < ApplicationController
 
 	def index
-		@keyboard = Keyboard.find(params[:keyboard_id])
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:keyboard_name])
+		
 		@commits = @keyboard.commits
 	end
 
 	def show
-		@commit = Commit.find(params[:id])
-		@keyboard = @commit.keyboard
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:keyboard_name])
+
+		@commit = @keyboard.commits.find(params[:id])
 	end
 
 	def create
-		@keyboard = Keyboard.find(params[:keyboard_id])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
 		@commit = @keyboard.commits.find(params[:id])
 
 		p params
 	end
 
 	def fork
-		forked_commit = Commit.find(params[:id])
 
-		forked_keyboard = forked_commit.keyboard
+		forked_keyboard = Keyboard.find_by_name(params[:keyboard_name])
+		forked_commit = Commit.find(params[:id])
 
 
 		@keyboard = Keyboard.new
@@ -36,7 +40,7 @@ class CommitsController < ApplicationController
 		@keyboard.commits << initial_commit
 
 		if @keyboard.save
-			redirect_to @keyboard
+			redirect_to user_keyboard_path(@keyboard.user.name, @keyboard.name)
 		else
 			render 'new'
 		end

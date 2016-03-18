@@ -1,25 +1,27 @@
 class KeyboardsController < ApplicationController
 
 	def index
-		@user = User.first
-		@keyboards = User.first.keyboards
+		@user = User.find_by_name(params[:user_name])
+		@keyboards = @user.keyboards
 	end
 
 	def new
-		@user = User.find(params[:user_id])
+		@user = User.find_by_name(params[:user_name])
 		@keyboard = Keyboard.new
 	end
 
 	def show
-		@keyboard = Keyboard.find(params[:id])
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:name])
 	end
 
 	def edit
-		@keyboard = Keyboard.find(params[:id])
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:name])
 	end
 
 	def create
-		@user = Keyboard.find(params[:user_id])
+		@user = User.find_by_name(params[:user_name])
 		@keyboard = Keyboard.new(keyboard_params)
 
 		@keyboard.user = User.first
@@ -27,31 +29,30 @@ class KeyboardsController < ApplicationController
 		@keyboard.commits << Commit.create(name: "Initial commit", layers: [], keyboard: @keyboard)
 
 		if @keyboard.save
-			redirect_to @keyboard
+			redirect_to user_keyboard_path(@user.name, @keyboard.name)
 		else
 			render 'new'
 		end
 	end
 
-
 	def update
-		@keyboard = Keyboard.find(params[:id])
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:name])
 
 		if @keyboard.update(keyboard_params)
-		    redirect_to @keyboard
+		    redirect_to user_keyboard_path(@user.name, @keyboard.name)
 		else
 		    render 'edit'
 		end
   	end
 
-
   	def destroy
-    	@keyboard = Keyboard.find(params[:id])
-    	user = @keyboard.user
+  		@user = User.find_by_name(params[:user_name])
+    	@keyboard = Keyboard.find_by_name(params[:name])
 
     	@keyboard.destroy
 
-    	redirect_to user_keyboards_path(user)
+    	redirect_to user_keyboards_path(@user.name)
   	end
 
 
