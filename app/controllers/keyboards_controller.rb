@@ -1,10 +1,12 @@
 class KeyboardsController < ApplicationController
 
 	def index
+		@user = User.first
 		@keyboards = User.first.keyboards
 	end
 
 	def new
+		@user = User.find(params[:user_id])
 		@keyboard = Keyboard.new
 	end
 
@@ -17,11 +19,12 @@ class KeyboardsController < ApplicationController
 	end
 
 	def create
+		@user = Keyboard.find(params[:user_id])
 		@keyboard = Keyboard.new(keyboard_params)
 
 		@keyboard.user = User.first
 
-		@keyboard.commits << Commit.create(name: "Initial commit", data: "{\"layers\":[]}", keyboard: @keyboard)
+		@keyboard.commits << Commit.create(name: "Initial commit", layers: [], keyboard: @keyboard)
 
 		if @keyboard.save
 			redirect_to @keyboard
@@ -44,9 +47,11 @@ class KeyboardsController < ApplicationController
 
   	def destroy
     	@keyboard = Keyboard.find(params[:id])
+    	user = @keyboard.user
+
     	@keyboard.destroy
 
-    	redirect_to keyboards_path
+    	redirect_to user_keyboards_path(user)
   	end
 
 

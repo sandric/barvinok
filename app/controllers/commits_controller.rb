@@ -6,13 +6,22 @@ class CommitsController < ApplicationController
 	end
 
 	def show
+		@commit = Commit.find(params[:id])
+		@keyboard = @commit.keyboard
+	end
+
+	def create
 		@keyboard = Keyboard.find(params[:keyboard_id])
 		@commit = @keyboard.commits.find(params[:id])
+
+		p params
 	end
 
 	def fork
-		forked_keyboard = Keyboard.find(params[:keyboard_id])
-		forked_commit = forked_keyboard.commits.find(params[:id])
+		forked_commit = Commit.find(params[:id])
+
+		forked_keyboard = forked_commit.keyboard
+
 
 		@keyboard = Keyboard.new
 
@@ -20,7 +29,7 @@ class CommitsController < ApplicationController
 
 		@keyboard.user = User.first
 
-		initial_commit = Commit.create(name: "Initial commit forked from " + forked_commit.name, data: forked_commit.data, keyboard: @keyboard)
+		initial_commit = Commit.create(name: "Initial commit forked from " + forked_commit.name, layers: forked_commit.layers, keyboard: @keyboard)
 
 		initial_commit.parent = forked_commit
 

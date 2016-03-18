@@ -2,7 +2,10 @@
 
 <h2><%= @commit.name %></h2>
 
-<%= link_to 'Fork', fork_keyboard_commit_path(@keyboard, @commit), :method => :post %>
+<%= link_to 'Fork', fork_commit_path(@commit), :method => :post %>
+
+<%= link_to 'Commit', keyboard_commits_path(@keyboard, @commit), :method => :post %>
+
 
 <div id="app">
 </div>
@@ -18,6 +21,6 @@ window.editor = CodeMirror(document.getElementById("text"), {
         lineNumbers: true
       });
 
-yizhackclj.components.initialize(<%= raw @commit.data.to_json %>);
+yizhackclj.components.initialize("<%= j raw @commit.as_json %>");
 
 <% end %>

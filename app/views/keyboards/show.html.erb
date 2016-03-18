@@ -4,7 +4,7 @@
 
 <%= link_to 'Commits', keyboard_commits_path(@keyboard) %>
 
-<%= link_to 'HEAD', keyboard_commit_path(@keyboard, @keyboard.commits.last) %>
+<%= link_to 'HEAD', commit_path(@keyboard.commits.last) %>
 
 <%= link_to 'Talks', keyboard_talks_path(@keyboard) %>
 

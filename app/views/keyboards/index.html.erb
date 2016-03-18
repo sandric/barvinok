@@ -1,6 +1,6 @@
 <h1>Keyboards</h1>
 
-<%= link_to 'Create new keyboard', new_keyboard_path %>
+<%= link_to 'Create new keyboard', new_user_keyboard_path(@user, @keyboard) %>
 
 
 <ul>
@@ -14,7 +14,7 @@
 
 			<%= link_to 'Commits', keyboard_commits_path(keyboard) %>
 
-			<%= link_to 'HEAD', keyboard_commit_path(keyboard, keyboard.commits.last) %>
+			<%= link_to 'HEAD', commit_path(keyboard.commits.last) %>
 		</li>
 	<% end %>
 </ul>

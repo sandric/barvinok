@@ -6,11 +6,11 @@
 	<% @talks.each do |talk| %>
 		<li> 
 
-			<%= link_to talk.title, keyboard_talk_path(@keyboard, talk) %> 
+			<%= link_to talk.title, talk_path(talk) %> 
 
-			<%= link_to 'Edit', edit_keyboard_talk_path(@keyboard, talk) %> 
+			<%= link_to 'Edit', edit_talk_path(talk) %> 
 
-			<%= link_to 'Delete', keyboard_talk_path(@keyboard, talk), method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= link_to 'Delete', talk_path(talk), method: :delete, data: { confirm: 'Are you sure?' } %>
 		</li>
 	<% end %>
 </ul>

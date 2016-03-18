@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
 
-	before_action :resources
-
 	def new
+		@talk = Talk.find(params[:talk_id])
 		@comment = Comment.new(talk: @talk)
 	end
 
@@ -15,13 +14,14 @@ class CommentsController < ApplicationController
 	end
 
 	def create
+		@talk = Talk.find(params[:talk_id])
 		@comment = Comment.new(comment_params)
 
 		@comment.talk = @talk
 		@comment.user = User.first
 
 		if @comment.save
-			redirect_to keyboard_talk_comment_path(@keyboard, @talk, @comment)
+			redirect_to comment_path(@comment)
 		else
 			render 'new'
 		end
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.find(params[:id])
 
 		if @comment.update(comment_params)
-		    redirect_to keyboard_talk_comment_path(@keyboard, @talk, @comment)
+		    redirect_to comment_path(@comment)
 		else
 		    render 'edit'
 		end
@@ -41,18 +41,15 @@ class CommentsController < ApplicationController
 
   	def destroy
     	@comment = Comment.find(params[:id])
+    	talk = @comment.talk
+
     	@comment.destroy
 
-    	redirect_to keyboard_talk_path(@keyboard, @talk)
+    	redirect_to talk_path(talk)
   	end
 
 
   	private
-
-  		def resources
-  			@keyboard = Keyboard.find(params[:keyboard_id])
-  			@talk = Talk.find(params[:talk_id])
-  		end
 
   		def comment_params
     		params.require(:comment).permit(:data)

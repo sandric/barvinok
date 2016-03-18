@@ -2,7 +2,6 @@ class TalksController < ApplicationController
 
 	def index
 		@keyboard = Keyboard.find(params[:keyboard_id])
-		p @keyboard.talks
 		@talks = @keyboard.talks
 	end
 
@@ -12,12 +11,10 @@ class TalksController < ApplicationController
 	end
 
 	def show
-		@keyboard = Keyboard.find(params[:keyboard_id])
 		@talk = Talk.find(params[:id])
 	end
 
 	def edit
-		@keyboard = Keyboard.find(params[:keyboard_id])
 		@talk = Talk.find(params[:id])
 	end
 
@@ -29,7 +26,7 @@ class TalksController < ApplicationController
 		@talk.user = User.first
 
 		if @talk.save
-			redirect_to keyboard_talk_path(@keyboard, @talk)
+			redirect_to talk_path(@talk)
 		else
 			render 'new'
 		end
@@ -37,11 +34,10 @@ class TalksController < ApplicationController
 
 
 	def update
-		@keyboard = Keyboard.find(params[:keyboard_id])
 		@talk = Talk.find(params[:id])
 
 		if @talk.update(talk_params)
-		    redirect_to keyboard_talk_path(@keyboard, @talk)
+		    redirect_to talk_path(@talk)
 		else
 		    render 'edit'
 		end
@@ -49,11 +45,12 @@ class TalksController < ApplicationController
 
 
   	def destroy
-  		@keyboard = Keyboard.find(params[:keyboard_id])
     	@talk = Talk.find(params[:id])
+    	keyboard = @talk.keyboard
+
     	@talk.destroy
 
-    	redirect_to keyboard_talks_path(@keyboard)
+    	redirect_to keyboard_talks_path(keyboard)
   	end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315115137) do
+ActiveRecord::Schema.define(version: 20160317111233) do
 
   create_table "comments", force: :cascade do |t|
     t.text    "data"
@@ -22,19 +22,26 @@ ActiveRecord::Schema.define(version: 20160315115137) do
   end
 
   create_table "commits", force: :cascade do |t|
-    t.text    "data"
     t.string  "name"
-    t.integer "keyboard_id"
     t.integer "parent_id"
+    t.integer "keyboard_id"
     t.index ["keyboard_id"], name: "index_commits_on_keyboard_id"
   end
 
   create_table "keyboards", force: :cascade do |t|
-    t.text    "data"
     t.string  "name"
     t.text    "description"
     t.integer "user_id"
     t.index ["user_id"], name: "index_keyboards_on_user_id"
+  end
+
+  create_table "layers", force: :cascade do |t|
+    t.string  "name"
+    t.string  "color"
+    t.integer "vid"
+    t.text    "layout"
+    t.integer "commit_id"
+    t.index ["commit_id"], name: "index_layers_on_commit_id"
   end
 
   create_table "talks", force: :cascade do |t|
