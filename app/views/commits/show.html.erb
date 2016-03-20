@@ -10,17 +10,105 @@
 <div id="app">
 </div>
 
-<div id="text">
+<div id="editor">
 </div>
 
 
 <%= javascript_tag do %>
 
-window.editor = CodeMirror(document.getElementById("text"), {
+/*window.editor = CodeMirror(document.getElementById("text"), {
         mode:  "javascript",
         lineNumbers: true
-      });
+      });*/
 
-yizhackclj.components.initialize("<%= j raw @commit.as_json %>");
+	function mergeViewHeight(mergeView) {
+        function editorHeight(editor) {
+          if (!editor) return 0;
+          return editor.getScrollInfo().height;
+        }
+        return Math.max(editorHeight(mergeView.leftOriginal()),
+                        editorHeight(mergeView.editor()),
+                        editorHeight(mergeView.rightOriginal()));
+    }
+
+    function resize(mergeView) {
+        var height = mergeViewHeight(mergeView);
+        for(;;) {
+          if (mergeView.leftOriginal())
+            mergeView.leftOriginal().setSize(null, height);
+          mergeView.editor().setSize(null, height);
+          if (mergeView.rightOriginal())
+            mergeView.rightOriginal().setSize(null, height);
+
+          var newHeight = mergeViewHeight(mergeView);
+          if (newHeight >= height) break;
+          else height = newHeight;
+        }
+        mergeView.wrap.style.height = height + "px";
+    }
+
+
+    
+    window.createEditor = function(originalData) {
+
+        var editorElement = document.getElementById("editor");
+
+        window.editor = CodeMirror.MergeView(editorElement, {
+                  orig: originalData,
+                  value: originalData,
+                  lineNumbers: true,
+                  mode: "application/ld+json",
+                  highlightDifferences: true
+              });
+
+        resize(window.editor)
+
+        editorElement.className += " hidden";
+    }
+
+
+    window.commit = function(name, description, layers) {
+    
+        console.log('making commit:');
+
+        console.log(name);
+
+        console.log(description);
+
+        console.log(layers);
+
+
+        var parsed_layers = JSON.parse(layers);
+
+        var prepared_layers = [];
+
+        for(parsed_layer of parsed_layers.layers) {
+        	prepared_layer = parsed_layer;
+        	prepared_layer.layout = JSON.stringify(parsed_layer.layout);
+
+        	prepared_layers.push(prepared_layer);
+        }
+
+        prepared_layers;
+
+        console.log("prepared_layers:");
+
+        console.log(prepared_layers);
+
+
+        $.post("<%= user_keyboard_commits_path(@user.name, @keyboard.name) %>", 
+        	{
+        		commit: 
+        		{ 
+        			name: name, 
+        			description: description,
+        			layers_attributes: prepared_layers,
+        			parent_id: <%= @commit.id %>
+        		} 
+        	} 
+        );
+    }
+
+yizhackclj.core.initialize("<%= j raw @commit.as_json %>");
 
 <% end %>

@@ -2,7 +2,9 @@ class Commit < ActiveRecord::Base
 	acts_as_tree
 	
 	belongs_to :keyboard
-	has_many :layers
+	has_many :layers, :inverse_of => :commit
+
+	accepts_nested_attributes_for :layers
 
 	def as_json
        	{

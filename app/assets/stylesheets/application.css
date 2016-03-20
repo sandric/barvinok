@@ -12,6 +12,7 @@
  *
 
  *= require codemirror.css
+ *= require codemirror-merge.css
  *= require bootstrap.min.css
 
 

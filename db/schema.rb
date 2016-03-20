@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317111233) do
+ActiveRecord::Schema.define(version: 20160319213958) do
 
   create_table "comments", force: :cascade do |t|
     t.text    "data"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160317111233) do
     t.string  "name"
     t.integer "parent_id"
     t.integer "keyboard_id"
+    t.text    "description"
     t.index ["keyboard_id"], name: "index_commits_on_keyboard_id"
   end
 

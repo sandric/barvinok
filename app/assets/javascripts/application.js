@@ -17,6 +17,8 @@
 //= require marked.min
 
 //= require codemirror
+//= require diff_match_patch
+//= require codemirror-merge
 
 //= require markdown
 //= require javascript

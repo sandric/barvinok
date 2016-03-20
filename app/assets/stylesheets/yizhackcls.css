@@ -1,14 +1,13 @@
-
-#text {
-  visibility: hidden;
+#editor.hidden {
+  display: none;
 }
 
-#text.active {
-  visibility: visible;
+#editor.visible {
+  display: block;
 }
 
 
-#text .CodeMirror {
+#editor .CodeMirror {
   height: 100%
 }
 

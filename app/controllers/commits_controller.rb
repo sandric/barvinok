@@ -15,10 +15,20 @@ class CommitsController < ApplicationController
 	end
 
 	def create
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-		@commit = @keyboard.commits.find(params[:id])
 
-		p params
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+
+		@commit = Commit.new(commit_params)
+
+		@commit.keyboard = @keyboard
+		
+
+		if @commit.save
+			redirect_to user_keyboard_commit_path(@user.name, @keyboard.name, @commit)
+		else
+			head :no_content, :status => :bad_request
+		end
 	end
 
 	def fork
@@ -45,4 +55,10 @@ class CommitsController < ApplicationController
 			render 'new'
 		end
 	end
+
+
+	private 
+		def commit_params
+    		params.require(:commit).permit(:name, :description, :parent_id, :layers_attributes => [:id, :vid, :name, :color, :layout])
+  		end
 end
