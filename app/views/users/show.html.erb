@@ -2,3 +2,7 @@
 <div> <%= @user.email %> </div>
 
 <%= link_to 'Likes', likes_user_path(@user.name) %>
+
+<h2>Activity: </h2>
+
+<%= render_activities(PublicActivity::Activity.all.where(:owner => @user)) %>

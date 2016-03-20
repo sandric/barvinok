@@ -34,6 +34,8 @@ gem 'acts_as_tree'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
+gem 'public_activity'
+
 
 gem 'rack-cors', :require => 'rack/cors'
 

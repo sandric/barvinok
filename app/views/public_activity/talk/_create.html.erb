@@ -1,0 +1,9 @@
+<% if activity.trackable && activity.owner %>
+	<div>
+  		Created <%= link_to activity.trackable.title, user_keyboard_talk_path(activity.owner.name, activity.trackable.keyboard.name, activity.trackable) %> talk
+  	</div>
+<% else %>
+  	<div>
+  		Added talk that does not exist anymore.
+  	</div>
+<% end %>

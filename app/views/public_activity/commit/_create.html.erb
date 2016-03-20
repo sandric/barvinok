@@ -1,0 +1,9 @@
+<% if activity.trackable && activity.owner %>
+	<div>
+  		Added <%= link_to activity.trackable.name, user_keyboard_commit_path(activity.owner.name, activity.trackable.keyboard.name, activity.trackable) %> commit to <%= link_to activity.trackable.keyboard.name, user_keyboard_path(activity.owner.name, activity.trackable.keyboard.name) %> keyboard
+  	</div>
+<% else %>
+  	<div>
+  		Added commit that does not exist anymore.
+  	</div>
+<% end %>

@@ -1,0 +1,9 @@
+<% if activity.trackable && activity.owner %>
+	<div>
+  		Added <%= link_to "Comment", user_keyboard_talk_comment_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk, activity.trackable) %> to <%= link_to activity.trackable.talk.title, user_keyboard_talk_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk) %> talk
+  	</div>
+<% else %>
+  	<div>
+  		Added comment that does not exist anymore.
+  	</div>
+<% end %>

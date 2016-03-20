@@ -1,4 +1,7 @@
 class Commit < ActiveRecord::Base
+	include PublicActivity::Model
+  	tracked owner: proc {|controller, model| model.keyboard.user }
+  	
 	acts_as_tree
 	
 	belongs_to :keyboard
