@@ -64,15 +64,6 @@
 
     window.commit = function(name, description, layers) {
     
-        console.log('making commit:');
-
-        console.log(name);
-
-        console.log(description);
-
-        console.log(layers);
-
-
         var parsed_layers = JSON.parse(layers);
 
         var prepared_layers = [];
@@ -85,11 +76,6 @@
         }
 
         prepared_layers;
-
-        console.log("prepared_layers:");
-
-        console.log(prepared_layers);
-
 
         $.post("<%= user_keyboard_commits_path(@user.name, @keyboard.name) %>", 
         	{

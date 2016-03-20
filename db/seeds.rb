@@ -58,6 +58,11 @@ user_second = User.create(name: "TestUser 2", email: "testuser2@mail.com")
 first_keyboard = Keyboard.create(name: "First keyboard", description: "First description", user: user)
 second_keyboard = Keyboard.create(name: "Second keyboard", description: "Second description", user: user)
 
+first_keyboard.liked_by user
+first_keyboard.liked_by user_second
+
+second_keyboard.liked_by user
+
 
 5.times do |index|
 	commit = Commit.create!(name: "First kb's #{index}'s commit", keyboard: first_keyboard)

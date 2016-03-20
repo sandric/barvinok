@@ -30,8 +30,18 @@ Rails.application.routes.draw do
   resources :users, :only => [:index, :new, :create]
 
   resources :users, :param => :name, :path => '', :only => [:show, :edit, :update, :destroy] do
+    member do
+      get :likes
+    end
+
     resources :keyboards, :only => [:index, :new, :create]
     resources :keyboards, :param => :name, :path => '', :only => [:show, :edit, :update, :destroy] do
+      member do
+        get :likes
+        patch :like
+        patch :unlike
+      end
+    
       resources :commits, :only => [:index, :show, :new, :create] do
         member do
           post :fork

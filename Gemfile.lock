@@ -42,6 +42,7 @@ GEM
       tzinfo (~> 1.1)
     acts_as_tree (2.4.0)
       activerecord (>= 3.0.0)
+    acts_as_votable (0.10.0)
     arel (7.0.0)
     builder (3.2.2)
     byebug (8.2.2)
@@ -152,6 +153,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tree
+  acts_as_votable (~> 0.10.0)
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)

@@ -1,2 +1,4 @@
 <div> <%= @user.name %> </div>
 <div> <%= @user.email %> </div>
+
+<%= link_to 'Likes', likes_user_path(@user.name) %>

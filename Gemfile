@@ -32,6 +32,8 @@ gem 'redis', '~> 3.0'
 
 gem 'acts_as_tree'
 
+gem 'acts_as_votable', '~> 0.10.0'
+
 
 gem 'rack-cors', :require => 'rack/cors'
 

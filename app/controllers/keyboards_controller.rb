@@ -20,6 +20,13 @@ class KeyboardsController < ApplicationController
 		@keyboard = @user.keyboards.find_by_name(params[:name])
 	end
 
+	def likes
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:name])
+
+		@likers = @keyboard.votes_for.up.by_type(User).voters
+	end
+
 	def create
 		@user = User.find_by_name(params[:user_name])
 		@keyboard = Keyboard.new(keyboard_params)
@@ -45,6 +52,24 @@ class KeyboardsController < ApplicationController
 		    render 'edit'
 		end
   	end
+
+  	def like
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:name])
+
+		@keyboard.liked_by @user
+
+		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+	end
+
+  	def unlike
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:name])
+
+		@keyboard.unliked_by @user
+
+		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+	end
 
   	def destroy
   		@user = User.find_by_name(params[:user_name])
