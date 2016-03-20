@@ -34,6 +34,8 @@ gem 'acts_as_tree'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
+gem "acts_as_follower"
+
 gem 'public_activity'
 
 

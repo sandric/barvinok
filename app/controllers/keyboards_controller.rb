@@ -27,6 +27,13 @@ class KeyboardsController < ApplicationController
 		@likers = @keyboard.votes_for.up.by_type(User).voters
 	end
 
+	def followers
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:name])
+
+		@followers = @keyboard.followers
+	end
+
 	def create
 		@user = User.find_by_name(params[:user_name])
 		@keyboard = Keyboard.new(keyboard_params)
@@ -79,6 +86,26 @@ class KeyboardsController < ApplicationController
 
     	redirect_to user_keyboards_path(@user.name)
   	end
+
+
+
+	def follow
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:name])
+
+		User.first.follow(@keyboard)
+
+		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+	end
+
+	def unfollow
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = Keyboard.find_by_name(params[:name])
+
+		User.first.stop_following(@keyboard)
+
+		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+	end
 
 
   	private

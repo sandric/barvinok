@@ -32,6 +32,11 @@ Rails.application.routes.draw do
   resources :users, :param => :name, :path => '', :only => [:show, :edit, :update, :destroy] do
     member do
       get :likes
+
+      get :followers
+      get :following
+      patch :follow
+      patch :unfollow
     end
 
     resources :keyboards, :only => [:index, :new, :create]
@@ -40,6 +45,10 @@ Rails.application.routes.draw do
         get :likes
         patch :like
         patch :unlike
+
+        get :followers
+        patch :follow
+        patch :unfollow
       end
     
       resources :commits, :only => [:index, :show, :new, :create] do

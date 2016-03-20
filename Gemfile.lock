@@ -40,6 +40,7 @@ GEM
       method_source
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts_as_follower (0.2.1)
     acts_as_tree (2.4.0)
       activerecord (>= 3.0.0)
     acts_as_votable (0.10.0)
@@ -157,6 +158,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_follower
   acts_as_tree
   acts_as_votable (~> 0.10.0)
   byebug

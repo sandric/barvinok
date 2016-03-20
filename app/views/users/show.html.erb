@@ -3,6 +3,21 @@
 
 <%= link_to 'Likes', likes_user_path(@user.name) %>
 
+<%= link_to 'Following', following_user_path(@user.name) %>
+
+<%= link_to 'Followers', followers_user_path(@user.name) %>
+
+<% if @user != User.first %>
+
+	<% if User.first.following?(@user) %>
+		<%= link_to 'Unfollow', unfollow_user_path(@user.name), method: :patch %>
+	<% else %>
+		<%= link_to 'Follow', follow_user_path(@user.name), method: :patch %>
+	<% end %>
+
+<% end %>
+
+
 <h2>Activity: </h2>
 
 <%= render_activities(PublicActivity::Activity.all.where(:owner => @user)) %>

@@ -53,10 +53,13 @@ user_second = User.create(name: "TestUser 2", email: "testuser2@mail.com")
 
 
 first_keyboard = Keyboard.create(name: "First keyboard", description: "First description", user: user)
-second_keyboard = Keyboard.create(name: "Second keyboard", description: "Second description", user: user)
+second_keyboard = Keyboard.create(name: "Second keyboard", description: "Second description", user: user_second)
+third_keyboard = Keyboard.create(name: "Thord keyboard", description: "Third description", user: user)
 
-first_keyboard.liked_by user
-first_keyboard.liked_by user_second
+
+second_keyboard.liked_by user
+third_keyboard.liked_by user_second
+
 
 second_keyboard.liked_by user
 
