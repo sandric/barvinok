@@ -16,11 +16,6 @@
 
 <%= javascript_tag do %>
 
-/*window.editor = CodeMirror(document.getElementById("text"), {
-        mode:  "javascript",
-        lineNumbers: true
-      });*/
-
 	function mergeViewHeight(mergeView) {
         function editorHeight(editor) {
           if (!editor) return 0;
@@ -109,6 +104,6 @@
         );
     }
 
-yizhackclj.core.initialize("<%= j raw @commit.as_json %>");
+	yizhackclj.core.initialize("<%= j raw @commit.as_json %>");
 
 <% end %>

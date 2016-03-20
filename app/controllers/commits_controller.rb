@@ -56,6 +56,27 @@ class CommitsController < ApplicationController
 		end
 	end
 
+	def diff
+
+		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+		@commit = Commit.find(params[:id])
+
+		p "nana"
+		p @commit.as_json
+		p "nono"
+		p @commit.parent.as_json
+		p "nini"
+
+
+
+
+
+
+
+		@parent_commit = @commit.parent
+	end
+
+
 
 	private 
 		def commit_params

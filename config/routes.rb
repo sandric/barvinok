@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       resources :commits, :only => [:index, :show, :new, :create] do
         member do
           post :fork
+          get :diff
         end
 
         resources :layers, :param => :name, :only => [:show]
