@@ -6,11 +6,11 @@ require File.expand_path('../config/application', __FILE__)
 Rails.application.load_tasks
 
 
-namespace :search_suggestions do
+namespace :autosuggestions do
 
-  desc 'Generate search suggestions'
-  task index: :environment do
-    Commit.seed_layers_autosuggestions
+  desc 'Generate layers autosuggestions'
+  task seed_layers: :environment do
+    Layer.seed_layers_autosuggestions
   end
 
 end

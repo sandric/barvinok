@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   end
 
 
+  resources :layers, :only => [:index]
+
   resources :users, :only => [:index, :new, :create]
 
   resources :users, :param => :name, :path => '', :only => [:show, :edit, :update, :destroy] do

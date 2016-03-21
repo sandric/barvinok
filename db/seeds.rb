@@ -48,13 +48,13 @@ qwerty_layout = "[
 	]"
 
 
-user = User.create(name: "TestUser", email: "testuser@mail.com")
-user_second = User.create(name: "TestUser 2", email: "testuser2@mail.com")
+user = User.create(name: "testuser", email: "testuser@mail.com")
+user_second = User.create(name: "testuser2", email: "testuser2@mail.com")
 
 
-first_keyboard = Keyboard.create(name: "First keyboard", description: "First description", user: user)
-second_keyboard = Keyboard.create(name: "Second keyboard", description: "Second description", user: user_second)
-third_keyboard = Keyboard.create(name: "Thord keyboard", description: "Third description", user: user)
+first_keyboard = Keyboard.create(name: "first-keyboard", description: "first description", user: user)
+second_keyboard = Keyboard.create(name: "second-keyboard", description: "second description", user: user_second)
+third_keyboard = Keyboard.create(name: "third-keyboard", description: "third description", user: user)
 
 first_keyboard.create_activity :like, owner: user_second
 first_keyboard.create_activity :unlike, owner: user_second
@@ -80,14 +80,14 @@ second_keyboard.liked_by user
 
 parent_commit = Commit.create!(name: "First kb's 1's commit", keyboard: first_keyboard)
 
-Layer.create!(commit: parent_commit, vid: 1, layout: qwerty_layout, name: "iji First-1 commit layer name", color: "#ff0000")
-Layer.create!(commit: parent_commit, vid: 2, layout: qwerty_layout, name: "iji Second-1 commit layer name", color: "#00ff00")
+Layer.create!(commit: parent_commit, vid: 1, layout: qwerty_layout, name: "first-1-layer", color: "#ff0000")
+Layer.create!(commit: parent_commit, vid: 2, layout: qwerty_layout, name: "second-1-layer", color: "#00ff00")
 
 (2..7).each do |index|
 	commit = Commit.create!(name: "First kb's #{index}'s commit", keyboard: first_keyboard, parent: parent_commit)
 
-	Layer.create!(commit: commit, vid: 1, layout: qwerty_layout, name: "iji First-#{index} commit layer name", color: "#ff0000")
-	Layer.create!(commit: commit, vid: 2, layout: qwerty_layout, name: "iji Second-#{index} commit layer name", color: "#00ff00")
+	Layer.create!(commit: commit, vid: 1, layout: qwerty_layout, name: "first-#{index}-layer", color: "#ff0000")
+	Layer.create!(commit: commit, vid: 2, layout: qwerty_layout, name: "second-#{index}-layer", color: "#00ff00")
 
 	parent_commit = commit
 end
@@ -96,15 +96,15 @@ end
 
 parent_commit = Commit.create!(name: "Second kb's 1's commit", keyboard: second_keyboard)
 
-Layer.create!(commit: parent_commit, vid: 1, layout: qwerty_layout, name: "iji First-1 commit layer name", color: "#ff0000")
-Layer.create!(commit: parent_commit, vid: 2, layout: qwerty_layout, name: "iji Second-1 commit layer name", color: "#00ff00")
+Layer.create!(commit: parent_commit, vid: 1, layout: qwerty_layout, name: "first-1-layer", color: "#ff0000")
+Layer.create!(commit: parent_commit, vid: 2, layout: qwerty_layout, name: "second-1-layer", color: "#00ff00")
 
 
 (2..5).each do |index|
 	commit = Commit.create!(name: "Second kb's #{index}'s commit", keyboard: second_keyboard, parent: parent_commit)
 
-	Layer.create!(commit: commit, vid: 1, layout: qwerty_layout, name: "iji First-#{index} commit layer name", color: "#ff0000")
-	Layer.create!(commit: commit, vid: 2, layout: qwerty_layout, name: "iji Second-#{index} commit layer name", color: "#00ff00")
+	Layer.create!(commit: commit, vid: 1, layout: qwerty_layout, name: "first-#{index}-layer", color: "#ff0000")
+	Layer.create!(commit: commit, vid: 2, layout: qwerty_layout, name: "second-#{index}-layer", color: "#00ff00")
 end
 
 

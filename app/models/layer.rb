@@ -12,29 +12,27 @@ class Layer < ActiveRecord::Base
 	end
 
 
-	def self.layer_from_json(layer_json)
 
-		layer = Layer.new
+	def self.seed_layers_autosuggestions
+    	
+    	$redis.flushall
 
-		layer.vid = layer_json["vid"]
-		layer.name = layer_json["name"]
-		layer.color = layer_json["color"]
-		layer.layout = layer_json["layout"].to_s
+    	Layer.all.each do |layer|  	
+	      	path = Rails.application.routes.url_helpers
+	      		.user_keyboard_commit_layer_path(
+	      			layer.commit.keyboard.user.name, 
+	      			layer.commit.keyboard.name, 
+	      			layer.commit, 
+	      			layer.name)
+	      	
+	      	1.upto(path.length - 1) do |n|
+	      		prefix = path[1, n]
+	   	    	$redis.zadd "search-suggestions:#{prefix.downcase}", 1, path.downcase
+	      	end
+    	end
+  	end
 
-		return layer
-	end
-
-	def self.layer_from_json_string(layer_string)
-
-		layer_json = JSON.parse(layer_string)
-
-		self.layer_from_json(layer_json)
-	end
-
-	def self.layers_from_json_string(layers_string)
-
-		layers_json = JSON.parse(layers_string)
-
-		layers_json["layers"].map { |layer_json| self.layer_from_json layer_json } 
+	def self.layers_path_from_suggestion(query)
+		$redis.zrevrange "search-suggestions:#{query.downcase}", 0, 9
 	end
 end
