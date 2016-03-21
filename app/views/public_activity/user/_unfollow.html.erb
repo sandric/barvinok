@@ -1,0 +1,9 @@
+<% if activity.trackable && activity.owner %>
+	<div>
+  		Unfollowed <%= link_to activity.trackable.name, user_path(activity.trackable.name) %>
+  	</div>
+<% else %>
+  	<div>
+  		Unfollowed user that does not exist anymore.
+  	</div>
+<% end %>

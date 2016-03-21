@@ -26,12 +26,16 @@ class UsersController < ApplicationController
 		@user = User.find_by_name(params[:name])
 		User.first.follow(@user)
 
+		@user.create_activity :follow, owner: User.first
+
 		redirect_to user_path(@user.name)
 	end
 
 	def unfollow
 		@user = User.find_by_name(params[:name])
 		User.first.stop_following(@user)
+
+		@user.create_activity :unfollow, owner: User.first
 
 		redirect_to user_path(@user.name)
 	end

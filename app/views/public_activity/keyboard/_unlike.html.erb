@@ -1,0 +1,9 @@
+<% if activity.trackable && activity.owner %>
+	<div>
+  		Unliked <%= link_to activity.trackable.name, user_keyboard_path(activity.owner.name, activity.trackable.name) %>
+  	</div>
+<% else %>
+  	<div>
+  		Unliked keyboard that does not exist anymore.
+  	</div>
+<% end %>

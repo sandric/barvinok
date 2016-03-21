@@ -6,6 +6,8 @@
 
 <%= link_to 'Commit', user_keyboard_commits_path(@user.name, @keyboard.name, @commit), :method => :post %>
 
+<%= link_to 'Diff', diff_user_keyboard_commit_path(@user.name, @keyboard.name, @commit) %>
+
 
 <div id="app">
 </div>

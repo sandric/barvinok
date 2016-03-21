@@ -1,0 +1,9 @@
+<% if activity.trackable && activity.owner %>
+	<div>
+  		Followed <%= link_to activity.trackable.name, user_path(activity.trackable.name) %>
+  	</div>
+<% else %>
+  	<div>
+  		Followed user that does not exist anymore.
+  	</div>
+<% end %>

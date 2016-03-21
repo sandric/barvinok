@@ -64,7 +64,9 @@ class KeyboardsController < ApplicationController
 		@user = User.find_by_name(params[:user_name])
 		@keyboard = @user.keyboards.find_by_name(params[:name])
 
-		@keyboard.liked_by @user
+		@keyboard.liked_by User.first
+
+		@keyboard.create_activity :like, owner: User.first
 
 		redirect_to user_keyboard_path(@user.name, @keyboard.name)
 	end
@@ -73,7 +75,9 @@ class KeyboardsController < ApplicationController
 		@user = User.find_by_name(params[:user_name])
 		@keyboard = @user.keyboards.find_by_name(params[:name])
 
-		@keyboard.unliked_by @user
+		@keyboard.unliked_by User.first
+
+		@keyboard.create_activity :unlike, owner: User.first
 
 		redirect_to user_keyboard_path(@user.name, @keyboard.name)
 	end
@@ -95,6 +99,8 @@ class KeyboardsController < ApplicationController
 
 		User.first.follow(@keyboard)
 
+		@keyboard.create_activity :follow, owner: User.first
+
 		redirect_to user_keyboard_path(@user.name, @keyboard.name)
 	end
 
@@ -103,6 +109,8 @@ class KeyboardsController < ApplicationController
 		@keyboard = Keyboard.find_by_name(params[:name])
 
 		User.first.stop_following(@keyboard)
+
+		@keyboard.create_activity :unfollow, owner: User.first
 
 		redirect_to user_keyboard_path(@user.name, @keyboard.name)
 	end

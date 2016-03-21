@@ -3,5 +3,7 @@
 <% @commits.each do |commit| %>
 	<p>
 		<%= link_to commit.name, user_keyboard_commit_path(@user.name, @keyboard.name, commit) %>
+
+		<%= link_to 'Diff', diff_user_keyboard_commit_path(@user.name, @keyboard.name, commit) %>
 	</p>
 <% end %>
