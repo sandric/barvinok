@@ -1,39 +1,16 @@
 <%= form_for([@user, @keyboard, @commit], url: user_keyboard_commits_path(@user.name, @keyboard.name)) do |f| %>
 
-  <%= f.submit name: "submit" %>
-
   <%= f.text_field :name %>
 
-  <div class="description-editing-area">
-      <%= f.text_area :description %>
-      <div id="content" class="markdown"></div>
-  </div>
+  <%= f.text_area :description %>
+
+
 
   <%= f.hidden_field :parent_id, :value => @commit.id %>
 
   <%= f.hidden_field :layers %>
 
-<% end %>
 
-<%= javascript_tag do %>
-
-$(document).ready(function() {
-        editor = CodeMirror.fromTextArea(document.getElementById("commit_description"), {
-        value: document.getElementById("commit_description").innerHTML,
-        mode:  "markdown",
-        lineNumbers: true,
-
-      });
-
-    function updateTextArea() {
-        editor.save()
-        document.getElementById('content').innerHTML = marked(document.getElementById("commit_description").value);
-    }
-
-    editor.on('change', updateTextArea);
-
-
-    document.getElementById('content').innerHTML = marked(document.getElementById("commit_description").value);
-});
+  <%= f.submit name: "submit" %>
 
 <% end %>

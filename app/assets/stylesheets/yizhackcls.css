@@ -1,3 +1,17 @@
+.autocomplete {
+  float:right;
+}
+
+.autocomplete input {
+
+}
+
+.autocomplete .results a {
+  display: block;
+}
+
+
+
 #editor.hidden {
   display: none;
 }
@@ -51,8 +65,6 @@
 
 
 .control {
-  padding: 3pt;
-  text-align: center;
 }
 
 .layer .layout {
