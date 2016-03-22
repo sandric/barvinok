@@ -1,6 +1,9 @@
 <div> <%= @user.name %> </div>
 <div> <%= @user.email %> </div>
 
+<%= link_to 'Keyboards', user_keyboards_path(@user.name) %>
+
+
 <%= link_to 'Likes', likes_user_path(@user.name) %>
 
 <%= link_to 'Following', following_user_path(@user.name) %>

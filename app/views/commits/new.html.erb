@@ -1,13 +1,11 @@
 <h1><%= @keyboard.name %></h1>
 
-<h2><%= @commit.name %></h2>
+<h2>HERE GOES THE FORM</h2>
+
+<%= render 'form' %>
 
 
-<%= link_to 'Fork', fork_user_keyboard_commit_path(@user.name, @keyboard.name, @commit), :method => :post %>
-
-<%= link_to 'New Commit', new_user_keyboard_commit_path(@user.name, @keyboard.name) %>
-
-<%= link_to 'Diff', diff_user_keyboard_commit_path(@user.name, @keyboard.name, @commit) %>
+<%= link_to 'Commit', user_keyboard_commits_path(@user.name, @keyboard.name, @commit), :method => :post %>
 
 
 <div id="app">
@@ -78,8 +76,11 @@
         	prepared_layers.push(prepared_layer);
         }
 
-        prepared_layers;
+        console.log(prepared_layers);
 
+        $("#commit_layers").val(JSON.stringify(prepared_layers));
+
+        /*
         $.post("<%= user_keyboard_commits_path(@user.name, @keyboard.name) %>", 
         	{
         		commit: 
@@ -91,6 +92,7 @@
         		} 
         	} 
         );
+        */
     }
 
 	yizhackclj.core.initialize("<%= j raw @commit.as_json %>");

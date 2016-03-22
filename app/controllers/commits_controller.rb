@@ -14,20 +14,35 @@ class CommitsController < ApplicationController
 		@commit = @keyboard.commits.find(params[:id])
 	end
 
+	def new
+		@user = User.find_by_name(params[:user_name])
+		@keyboard = @user.keyboards.find_by_name(params[:keyboard_name])
+
+		@commit = Commit.new(@keyboard.commits.last.attributes)
+		@commit.name = "New commit name"
+		@commit.description = "New commit description"
+	end
+
+
 	def create
 
 		@user = User.find_by_name(params[:user_name])
 		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
 
-		@commit = Commit.new(commit_params)
+		attributes = commit_params
+
+		attributes[:layers_attributes] = JSON.parse(attributes[:layers])
+		attributes.delete(:layers)
+
+
+		@commit = Commit.new(attributes)
 
 		@commit.keyboard = @keyboard
 		
-
 		if @commit.save
 			redirect_to user_keyboard_commit_path(@user.name, @keyboard.name, @commit)
 		else
-			head :no_content, :status => :bad_request
+			render :new
 		end
 	end
 
@@ -68,6 +83,6 @@ class CommitsController < ApplicationController
 
 	private 
 		def commit_params
-    		params.require(:commit).permit(:name, :description, :parent_id, :layers_attributes => [:id, :vid, :name, :color, :layout])
+    		params.require(:commit).permit(:name, :description, :parent_id, :layers)
   		end
 end

@@ -108,6 +108,19 @@ Layer.create!(commit: parent_commit, vid: 2, layout: qwerty_layout, name: "secon
 end
 
 
+parent_commit = Commit.create!(name: "Third kb's 1's commit", keyboard: third_keyboard)
+
+Layer.create!(commit: parent_commit, vid: 1, layout: qwerty_layout, name: "first-1-layer", color: "#ff0000")
+Layer.create!(commit: parent_commit, vid: 2, layout: qwerty_layout, name: "second-1-layer", color: "#00ff00")
+
+
+(2..11).each do |index|
+	commit = Commit.create!(name: "Second kb's #{index}'s commit", keyboard: third_keyboard, parent: parent_commit)
+
+	Layer.create!(commit: commit, vid: 1, layout: qwerty_layout, name: "first-#{index}-layer", color: "#ff0000")
+	Layer.create!(commit: commit, vid: 2, layout: qwerty_layout, name: "second-#{index}-layer", color: "#00ff00")
+end
+
 
 first_talk = Talk.create(title: "first 1", data: "#OLA **1**", keyboard: first_keyboard, user: user)
 second_talk = Talk.create(title: "first 2", data: "#OLA **2**", keyboard: first_keyboard, user: user)

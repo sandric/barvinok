@@ -4,7 +4,7 @@ class LayersController < ApplicationController
 		query = params[:q]
 
 		respond_to do |format|
-           	format.json { render json: Layer.layers_path_from_suggestion(query)}
+           	format.json { render json: Layer.layers_path_from_suggestion(query) }
     	end
 	end
 
@@ -16,7 +16,15 @@ class LayersController < ApplicationController
 		@layer = @commit.layers.find_by_name(params[:name])
 
 		respond_to do |format|
-           	format.json { render json: @layer.as_json}
+           	format.json { render json: @layer.as_json }
+    	end
+	end
+
+	def base
+		@base_layer_name = params[:name]
+
+		respond_to do |format|
+           	format.json { render json: Layer.send("#{@base_layer_name}_layer") }
     	end
 	end
 
