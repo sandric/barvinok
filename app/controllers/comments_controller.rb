@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+	include CommentHelper
 
 	def new
 		@user = User.find_by_name(params[:user_name])
@@ -6,14 +7,6 @@ class CommentsController < ApplicationController
 		@talk = Talk.find(params[:talk_id])
 
 		@comment = Comment.new
-	end
-
-	def show
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-		@talk = Talk.find(params[:talk_id])
-
-		@comment = Comment.find(params[:id])
 	end
 
 	def edit
@@ -35,7 +28,7 @@ class CommentsController < ApplicationController
 		@comment.user = @user
 
 		if @comment.save
-			redirect_to user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, @comment)
+			redirect_to show_comment_path(@user.name, @keyboard.name, @talk, @comment)
 		else
 			render 'new'
 		end
@@ -50,7 +43,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.find(params[:id])
 
 		if @comment.update(comment_params)
-		    redirect_to user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, @comment)
+		    redirect_to show_comment_path(@user.name, @keyboard.name, @talk, @comment)
 		else
 		    render 'edit'
 		end

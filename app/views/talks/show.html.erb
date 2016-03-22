@@ -11,5 +11,16 @@
 
 <div id="content" class="markdown"></div>
 
+<% @talk.comments.each do |comment| %>
+	<div class="comment" id="comment_<%= comment.id %>">
+		<div class="head">
+			Created by: <b><%= comment.user.name %></b>
 
-<%= render :partial => "shared/markdown_object", collection: @talk.comments, locals: {dataMethod: :data} %>
+			<%= link_to 'Delete', user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+			<%= link_to 'Edit', edit_user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment) %> 
+
+		</div>
+		<%= render :partial => "shared/markdown_object", object: comment, locals: {dataMethod: :data} %>
+	</div>
+<% end %>
