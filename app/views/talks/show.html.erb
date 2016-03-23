@@ -2,6 +2,8 @@
 
 <%= link_to 'Delete', user_keyboard_talk_path(@user.name, @keyboard.name, @talk), method: :delete, data: { confirm: 'Are you sure?' } %>
 
+<%= link_to 'Add Comment', new_user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk) %>
+
 
 <h1> <%= j @talk.title %> </h1>
 

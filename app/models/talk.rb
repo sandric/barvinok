@@ -1,8 +1,8 @@
 class Talk < ActiveRecord::Base
 	include PublicActivity::Model
-  	tracked owner: :user
+  	tracked only: [:create, :update], owner: :user
   	
 	belongs_to :keyboard
 	belongs_to :user
-	has_many :comments
+	has_many :comments, dependent: :destroy
 end

@@ -1,6 +1,6 @@
 class Keyboard < ActiveRecord::Base
 	include PublicActivity::Model
-  	tracked owner: :user
+  	tracked only: [:create, :update], owner: :user
 
 	acts_as_votable
 

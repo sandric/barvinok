@@ -1,32 +1,5 @@
 Rails.application.routes.draw do
 
-  scope '/api', as: 'api' do
-
-    resources :users do
-      resources :keyboards, :only => [:index, :new, :create]
-    end
-
-    resources :keyboards, :only => [:show, :edit, :update, :destroy] do
-    	resources :commits, :only => [:index, :new, :create]
-    	resources :talks, :only => [:index, :new, :create]
-    end
-
-    resources :commits, :only => [:show] do
-      member do
-        post :fork
-      end
-    end
-
-    resources :layers, :only => [:index, :show]
-
-    resources :talks, :only => [:show, :edit, :update, :destroy] do
-      resources :comments, :only => [:new, :create]
-    end
-
-    resources :comments, :only => [:show, :edit, :update, :destroy]
-  end
-
-
   resources :layers, :only => [:index]
 
   get "base/:name", to: "layers#base", param: :name
