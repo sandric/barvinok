@@ -1,9 +1,12 @@
 <% if activity.trackable && activity.owner %>
 	<div>
-  		Added <%= link_to "Comment", show_comment_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk, activity.trackable) %> to <%= link_to activity.trackable.talk.title, user_keyboard_talk_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk) %> talk
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+  		
+  		added <%= link_to "Comment", show_comment_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk, activity.trackable) %> to <%= link_to activity.trackable.talk.title, user_keyboard_talk_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk) %> talk
   	</div>
 <% else %>
   	<div>
-  		Added comment that does not exist anymore.
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+  		added comment that does not exist anymore.
   	</div>
 <% end %>

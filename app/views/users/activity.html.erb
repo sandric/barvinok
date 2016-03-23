@@ -1,0 +1,3 @@
+<h1> Your activities </h1>
+
+<%= render_activities(PublicActivity::Activity.all.where(:owner => @user).order(created_at: :desc)) %>

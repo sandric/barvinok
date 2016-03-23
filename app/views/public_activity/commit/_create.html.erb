@@ -1,9 +1,13 @@
 <% if activity.trackable && activity.owner %>
 	<div>
-  		Added <%= link_to activity.trackable.name, user_keyboard_commit_path(activity.owner.name, activity.trackable.keyboard.name, activity.trackable) %> commit to <%= link_to activity.trackable.keyboard.name, user_keyboard_path(activity.owner.name, activity.trackable.keyboard.name) %> keyboard
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+
+  		added <%= link_to activity.trackable.name, user_keyboard_commit_path(activity.owner.name, activity.trackable.keyboard.name, activity.trackable) %> commit to <%= link_to activity.trackable.keyboard.name, user_keyboard_path(activity.owner.name, activity.trackable.keyboard.name) %> keyboard
   	</div>
 <% else %>
   	<div>
-  		Added commit that does not exist anymore.
+  		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+
+  		added commit that does not exist anymore.
   	</div>
 <% end %>

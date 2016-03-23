@@ -1,0 +1,6 @@
+<h1>Feed: </h1>
+
+<%= render_activities(PublicActivity::Activity
+	.where(owner_id: User.first.following_users.map {|user| user.id}, owner_type: "User")
+	.order(created_at: :desc))
+	%>

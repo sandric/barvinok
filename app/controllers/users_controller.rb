@@ -8,6 +8,14 @@ class UsersController < ApplicationController
 		@user = User.find_by_name(params[:name])
 	end
 
+	def activity
+		@user = User.find_by_name(params[:name])
+	end
+
+	def feed
+		@user = User.find_by_name(params[:name])
+	end
+
 	def likes
 		@user = User.find_by_name(params[:name])
 	end

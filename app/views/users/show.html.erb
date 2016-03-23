@@ -4,6 +4,12 @@
 <%= link_to 'Keyboards', user_keyboards_path(@user.name) %>
 
 
+<%= link_to 'Activity', activity_user_path(@user.name) %>
+
+<%= link_to 'Feed', feed_user_path(@user.name) %>
+
+
+
 <%= link_to 'Likes', likes_user_path(@user.name) %>
 
 <%= link_to 'Following', following_user_path(@user.name) %>
@@ -23,4 +29,15 @@
 
 <h2>Activity: </h2>
 
-<%= render_activities(PublicActivity::Activity.all.where(:owner => @user)) %>
+<%= render_activities(PublicActivity::Activity
+	.where(:owner => @user)
+	.limit(5)
+	.order(created_at: :desc)) %>
+
+<h2>Feed: </h2>
+
+<%= render_activities(PublicActivity::Activity
+	.where(owner_id: User.first.following_users.map {|user| user.id}, owner_type: "User")
+	.limit(5)
+	.order(created_at: :desc))
+	%>

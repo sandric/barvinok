@@ -1,9 +1,13 @@
 <% if activity.trackable && activity.owner %>
 	<div>
-  		Updated <%= link_to activity.trackable.name, user_keyboard_path(activity.owner.name, activity.trackable.name) %>
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+
+  		updated <%= link_to activity.trackable.name, user_keyboard_path(activity.owner.name, activity.trackable.name) %>
   	</div>
 <% else %>
   	<div>
-  		Updated a keyboard that does not exist anymore.
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+
+  		updated a keyboard that does not exist anymore.
   	</div>
 <% end %>
