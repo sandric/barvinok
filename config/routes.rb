@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :layers, :only => [:index]
 
   get "base/:name", to: "layers#base", param: :name
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
   resources :users, :only => [:index, :new, :create]
 
   resources :users, :param => :name, :path => '', :only => [:show, :edit, :update, :destroy] do
+
     member do
       get :activity
       get :feed

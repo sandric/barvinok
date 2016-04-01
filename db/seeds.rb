@@ -48,10 +48,10 @@ qwerty_layout = "[
 	]"
 
 
-user = User.create(name: "testuser", email: "testuser@mail.com")
-user_second = User.create(name: "testuser2", email: "testuser2@mail.com")
-user_third = User.create(name: "testuser3", email: "testuser3@mail.com")
-user_fourth = User.create(name: "testuser4", email: "testuser4@mail.com")
+user = User.create!(name: "testuser", email: "testuser@mail.com", password: 'password', password_confirmation: 'password')
+user_second = User.create!(name: "testuser2", email: "testuser2@mail.com", password: 'password', password_confirmation: 'password')
+user_third = User.create!(name: "testuser3", email: "testuser3@mail.com", password: 'password', password_confirmation: 'password')
+user_fourth = User.create!(name: "testuser4", email: "testuser4@mail.com", password: 'password', password_confirmation: 'password')
 
 
 first_keyboard = Keyboard.create(name: "first-keyboard", description: "first description", user: user)

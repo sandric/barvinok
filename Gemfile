@@ -42,6 +42,9 @@ gem 'public_activity'
 gem 'rack-cors', :require => 'rack/cors'
 
 
+gem 'devise', git: 'git@github.com:plataformatec/devise.git'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -52,6 +55,9 @@ group :development do
   gem 'web-console', '~> 3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
