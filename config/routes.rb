@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+  root to: "home#index"
+
   devise_for :users
+
   resources :layers, :only => [:index]
 
   get "base/:name", to: "layers#base", param: :name
