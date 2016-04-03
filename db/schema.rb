@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401210540) do
+ActiveRecord::Schema.define(version: 20160402214009) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
@@ -55,6 +55,23 @@ ActiveRecord::Schema.define(version: 20160401210540) do
     t.datetime "updated_at"
     t.index ["followable_id", "followable_type"], name: "fk_followables"
     t.index ["follower_id", "follower_type"], name: "fk_follows"
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "accesstoken"
+    t.string   "refreshtoken"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "email"
+    t.string   "nickname"
+    t.string   "image"
+    t.string   "phone"
+    t.string   "urls"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
   create_table "keyboards", force: :cascade do |t|

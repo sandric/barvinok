@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  devise_for :users
+  devise_for :users, class_name: 'FormUser', :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations' }
 
   resources :layers, :only => [:index]
 

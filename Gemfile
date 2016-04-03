@@ -44,6 +44,18 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'devise', git: 'git@github.com:plataformatec/devise.git'
 
+gem 'omniauth'
+
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
+gem 'twitter'
+gem 'google-api-client'#, require: 'google/api_client'
+
+
+
+gem 'dotenv-rails', :groups => [:development, :test]
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
