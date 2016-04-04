@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   acts_as_followable
   acts_as_follower
 
+
+  attachment :avatar
+
   has_many :keyboards, dependent: :destroy
   has_many :talks, :dependent => :destroy
   has_many :comments, dependent: :destroy

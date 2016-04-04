@@ -47,4 +47,11 @@ class UsersController < ApplicationController
 
 		redirect_to user_path(@user.name)
 	end
+
+
+	private
+
+	def user_params
+  		params.require(:user).permit(:avatar)
+	end
 end

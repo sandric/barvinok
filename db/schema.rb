@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402214009) do
+ActiveRecord::Schema.define(version: 20160404234214) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
@@ -24,26 +24,29 @@ ActiveRecord::Schema.define(version: 20160402214009) do
     t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
-    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
-    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
   end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
 
   create_table "comments", force: :cascade do |t|
     t.text    "data"
     t.integer "talk_id"
     t.integer "user_id"
-    t.index ["talk_id"], name: "index_comments_on_talk_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
+
+  add_index "comments", ["talk_id"], name: "index_comments_on_talk_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "commits", force: :cascade do |t|
     t.string  "name"
     t.integer "parent_id"
     t.integer "keyboard_id"
     t.text    "description"
-    t.index ["keyboard_id"], name: "index_commits_on_keyboard_id"
   end
+
+  add_index "commits", ["keyboard_id"], name: "index_commits_on_keyboard_id"
 
   create_table "follows", force: :cascade do |t|
     t.string   "followable_type",                 null: false
@@ -53,9 +56,10 @@ ActiveRecord::Schema.define(version: 20160402214009) do
     t.boolean  "blocked",         default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["followable_id", "followable_type"], name: "fk_followables"
-    t.index ["follower_id", "follower_type"], name: "fk_follows"
   end
+
+  add_index "follows", ["followable_id", "followable_type"], name: "fk_followables"
+  add_index "follows", ["follower_id", "follower_type"], name: "fk_follows"
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -71,15 +75,17 @@ ActiveRecord::Schema.define(version: 20160402214009) do
     t.string   "urls"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["user_id"], name: "index_identities_on_user_id"
   end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
   create_table "keyboards", force: :cascade do |t|
     t.string  "name"
     t.text    "description"
     t.integer "user_id"
-    t.index ["user_id"], name: "index_keyboards_on_user_id"
   end
+
+  add_index "keyboards", ["user_id"], name: "index_keyboards_on_user_id"
 
   create_table "layers", force: :cascade do |t|
     t.string  "name"
@@ -87,17 +93,19 @@ ActiveRecord::Schema.define(version: 20160402214009) do
     t.integer "vid"
     t.text    "layout"
     t.integer "commit_id"
-    t.index ["commit_id"], name: "index_layers_on_commit_id"
   end
+
+  add_index "layers", ["commit_id"], name: "index_layers_on_commit_id"
 
   create_table "talks", force: :cascade do |t|
     t.text    "data"
     t.string  "title"
     t.integer "keyboard_id"
     t.integer "user_id"
-    t.index ["keyboard_id"], name: "index_talks_on_keyboard_id"
-    t.index ["user_id"], name: "index_talks_on_user_id"
   end
+
+  add_index "talks", ["keyboard_id"], name: "index_talks_on_keyboard_id"
+  add_index "talks", ["user_id"], name: "index_talks_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -111,9 +119,11 @@ ActiveRecord::Schema.define(version: 20160402214009) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.string   "avatar_id"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: :cascade do |t|
     t.string   "votable_type"
@@ -125,8 +135,9 @@ ActiveRecord::Schema.define(version: 20160402214009) do
     t.integer  "vote_weight"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
 
 end

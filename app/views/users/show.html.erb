@@ -1,6 +1,9 @@
 <div> <%= @user.name %> </div>
 <div> <%= @user.email %> </div>
 
+<%= image_tag attachment_url(@user, :avatar, :fill, 300, 300) %>
+
+
 <%= link_to 'Keyboards', user_keyboards_path(@user.name) %>
 
 
