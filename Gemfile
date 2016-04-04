@@ -57,6 +57,13 @@ gem 'google-api-client'#, require: 'google/api_client'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 
+
+
+gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git"
+gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master' 
+gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+gem 'rails_admin', git: 'git@github.com:sandric/rails_admin.git'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
