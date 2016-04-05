@@ -34,4 +34,43 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'User' do
+    list do
+      field :name
+      field :email
+      field :avatar, :refile do
+        pretty_value do
+          if (bindings[:object].avatar) 
+              bindings[:view].image_tag bindings[:view].attachment_url(bindings[:object], :avatar, :fill, 100, 100)
+          end
+        end
+      end
+    end
+
+    show do
+      field :name
+      field :email
+      field :avatar, :refile do
+        pretty_value do
+          if (bindings[:object].avatar) 
+              bindings[:view].image_tag bindings[:view].attachment_url(bindings[:object], :avatar, :fill, 300, 500)
+          end
+        end
+      end
+    end
+
+    edit do
+      field :name
+      field :email
+      field :avatar, :refile do
+        pretty_value do
+          if (bindings[:object].avatar) 
+              bindings[:view].image_tag bindings[:view].attachment_url(bindings[:object], :avatar, :fill, 300, 500)
+          end
+        end
+      end
+    end
+
+  end
 end
