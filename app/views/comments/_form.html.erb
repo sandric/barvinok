@@ -2,36 +2,8 @@
 
 <%= form_for [@keyboard, @talk, @comment], url: url do |f| %>
 
-  	<%= f.submit %>
+	<%= react_component('MarkdownEditor', model: "comment", field: "data", data: @comment.data) %>
 
-	<div class="data-editing-area">
-	  	<%= react_component('MarkdownEditor', model: "comment", data: @comment.data) %>
-      <%#= f.text_area :data %>
-  	</div>
+  <%= f.submit %>
 
-<% end %>
-
-<%#= react_component('MarkdownEditor', data: @comment.data) %>
-
-<%= javascript_tag do %>
-/*
-document.addEventListener('DOMContentLoaded', function() {
-        editor = CodeMirror.fromTextArea(document.getElementById("comment_data"), {
-  			value: document.getElementById("comment_data").innerHTML,
-  			mode:  "markdown",
-  			lineNumbers: true,
-
-  		});
-
-		function updateTextArea() {
-    		editor.save()
-    		document.getElementById('content').innerHTML = marked(document.getElementById("comment_data").value);
-		}
-
-		editor.on('change', updateTextArea);
-		
-
-    document.getElementById('content').innerHTML = marked(document.getElementById("comment_data").value);
-});
-*/
 <% end %>

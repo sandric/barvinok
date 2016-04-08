@@ -2,36 +2,10 @@
 
 <%= form_for [@user, @keyboard, @talk], url: url do |f| %>
 
-  	<%= f.submit %>
-
 	<%= f.text_field :title %>
 
-	<div class="data-editing-area">
-	  	<%= f.text_area :data %>
-	  	<div id="content" class="markdown"></div>
-  	</div>
+	<%= react_component('MarkdownEditor', model: "talk", field: "data", data: @talk.data) %>
 
-<% end %>
-
-<%= javascript_tag do %>
-
-$(document).ready(function() {
-        editor = CodeMirror.fromTextArea(document.getElementById("talk_data"), {
-  			value: document.getElementById("talk_data").innerHTML,
-  			mode:  "markdown",
-  			lineNumbers: true,
-
-  		});
-
-		function updateTextArea() {
-    		editor.save()
-    		document.getElementById('content').innerHTML = marked(document.getElementById("talk_data").value);
-		}
-
-		editor.on('change', updateTextArea);
-
-
-    	document.getElementById('content').innerHTML = marked(document.getElementById("talk_data").value);
-    });
+  <%= f.submit %>
 
 <% end %>

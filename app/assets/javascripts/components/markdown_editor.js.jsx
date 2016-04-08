@@ -11,7 +11,7 @@ class MarkdownEditor extends React.Component {
 
 	componentDidMount () {
 
-		this.editor = CodeMirror.fromTextArea(document.getElementById(`${this.props.model}_data`), {
+		this.editor = CodeMirror.fromTextArea(document.getElementById(`${this.props.model}_${this.props.field}`), {
   			value: this.state.data,
   			mode:  "markdown",
   			lineNumbers: true,
@@ -20,7 +20,7 @@ class MarkdownEditor extends React.Component {
 		this.editor.on('change', () => {
 			this.editor.save()
 
-    		this.state.data = document.getElementById(`${this.props.model}_data`).value;
+    		this.state.data = document.getElementById(`${this.props.model}_${this.props.field}`).value;
     		this.setState(this.state)
 		});
 	}
@@ -51,16 +51,15 @@ class MarkdownEditor extends React.Component {
 				</button>
 
 				<textarea 
-					className={this.state.mode == 'previewing' ? 'hidden' : ''}
-					name={this.props.model + '[data]'}
-					id={this.props.model + '_data'} 
+					name={this.props.model + '[' + this.props.field + ']'}
+					id={this.props.model + '_' + this.props.field} 
 					style={{display: 'none'}} 
 					value={this.state.data} 
 					readOnly>
 				</textarea>
 
 				<Markdown 
-					visible={this.state.mode == 'previewing'}
+					hidden={this.state.mode == 'editing'}
 					data={this.state.data}
 				/>
 			</div>

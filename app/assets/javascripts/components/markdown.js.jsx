@@ -12,7 +12,7 @@ class Markdown extends React.Component {
 
 		return (
 			<div 
-				className={this.props.visible ? 'markdown' : 'hidden'} 
+				className={this.props.hidden ? 'hidden' : 'markdown'} 
 				dangerouslySetInnerHTML={this.generateMarkup()}>
 			</div>
 		)

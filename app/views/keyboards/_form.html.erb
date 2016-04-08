@@ -2,36 +2,10 @@
 
 <%= form_for [@user, @keyboard], url: url do |f| %>
 
-  <%= f.submit %>
-
 	<%= f.text_field :name %>
 
-	<div class="description-editing-area">
-	  	<%= f.text_area :description %>
-	  	<div id="content" class="markdown"></div>
-  	</div>
+  <%= react_component('MarkdownEditor', model: "keyboard", field: "description", data: @keyboard.description) %>
 
-<% end %>
-
-<%= javascript_tag do %>
-
-$(document).ready(function() {
-        editor = CodeMirror.fromTextArea(document.getElementById("keyboard_description"), {
-  			value: document.getElementById("keyboard_description").innerHTML,
-  			mode:  "markdown",
-  			lineNumbers: true,
-
-  		});
-
-		function updateTextArea() {
-    		editor.save()
-    		document.getElementById('content').innerHTML = marked(document.getElementById("keyboard_description").value);
-		}
-
-		editor.on('change', updateTextArea);
-
-
-    document.getElementById('content').innerHTML = marked(document.getElementById("keyboard_description").value);
-});
+  <%= f.submit %>
 
 <% end %>
