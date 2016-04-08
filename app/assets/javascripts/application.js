@@ -27,7 +27,7 @@
 //= require markdown
 //= require javascript
 
-// require cljs/yizhackclj
+//= require cljs/yizhackclj
 
 
 

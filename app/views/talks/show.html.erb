@@ -18,10 +18,8 @@
 			<%= link_to 'Delete', user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
 
 			<%= link_to 'Edit', edit_user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment) %> 
-
 		</div>
 		
 		<%= react_component('Markdown', data: comment.data) %>
-
 	</div>
 <% end %>

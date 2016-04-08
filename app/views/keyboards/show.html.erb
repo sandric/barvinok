@@ -32,7 +32,6 @@
 <% end %>
 
 
-
 <h1> <%= j @keyboard.name %> </h1>
 
-<%= render :partial => "shared/markdown_object", object: @keyboard, locals: {dataMethod: :description} %>
+<%= react_component('Markdown', data: @keyboard.description) %>
