@@ -62,7 +62,6 @@ gem "refile", git: 'git@github.com:refile/refile.git', require: "refile/rails"
 gem "refile-mini_magick"
 
 
-
 gem 'react-rails', '~> 1.6.0'
 
 

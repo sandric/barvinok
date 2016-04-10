@@ -253,5 +253,4 @@ class Layer < ActiveRecord::Base
 			]
 		}"
 	end
-
 end
