@@ -10,7 +10,7 @@
 <%= link_to 'Diff', diff_user_keyboard_commit_path(@user.name, @keyboard.name, @commit) %>
 
 
-<div id="app">
+<div id="visual-editor">
 </div>
 
 <div id="editor">
@@ -18,7 +18,7 @@
 
 
 <%= javascript_tag do %>
-
+/*
 	window.createEditor = function(initialKeyboardData, keyboardData) {
 
     var editorElement = document.getElementById("editor");
@@ -78,8 +78,8 @@
       else height = newHeight;
     }
     mergeView.wrap.style.height = height + "px";
-  }
+  }*/
 
-	yizhackclj.core.initialize("<%= j raw @commit.as_json %>", false);
+	visual_editor.core.initialize("<%= j raw @commit.as_json %>", false);
 
 <% end %>

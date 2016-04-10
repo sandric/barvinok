@@ -11,7 +11,7 @@
 
 
 <%= javascript_tag do %>
-
+/*
   window.createEditor = function(initialKeyboardData, keyboardData) {
 
     var editorElement = document.getElementById("editor");
@@ -78,7 +78,7 @@
     }
     mergeView.wrap.style.height = height + "px";
   }
-
-  yizhackclj.core.initialize("<%= j raw @commit.as_json %>", true);
+*/
+  visual_editor.core.initialize("<%= j raw @commit.as_json %>", false);
 
 <% end %>

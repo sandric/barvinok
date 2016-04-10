@@ -12,42 +12,7 @@
 
 
 
-#editor.hidden {
-  display: none;
-}
-
-#editor.visible {
-  display: block;
-}
-
-
-#editor .CodeMirror {
-  height: 100%
-}
-
-.visual.active {
-  display: block;
-}
-
-.visual {
-  display: none;
-}
-
-
-.textual.active {
-  visibility: visible;
-}
-
-.textual {
-  visibility: hidden;
-}
-
-
-
-
 .layer {
-  display: none;
-
   border: 1px dashed;
   margin-top: 5pt;
 
@@ -58,13 +23,10 @@
   padding: 3pt;
 }
 
-.layer.selected {
-  display: block;
-}
-
-
 
 .control {
+  padding: 3pt;
+  text-align: center;
 }
 
 .layer .layout {
