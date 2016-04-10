@@ -3,18 +3,14 @@
 <h2><%= @commit.name %></h2>
 
 
-<%= link_to 'Fork', fork_user_keyboard_commit_path(@user.name, @keyboard.name, @commit), :method => :post %>
+<%= button_to 'Fork', fork_user_keyboard_commit_path(@user.name, @keyboard.name, @commit), :method => :post %>
 
 <%= link_to 'New Commit', new_user_keyboard_commit_path(@user.name, @keyboard.name) %>
 
 <%= link_to 'Diff', diff_user_keyboard_commit_path(@user.name, @keyboard.name, @commit) %>
 
 
-<div id="visual-editor">
-</div>
-
-<div id="editor">
-</div>
+<%= react_component('VisualEditor', data: raw(@commit.as_json), editing: false) %>
 
 
 <%= javascript_tag do %>
@@ -78,8 +74,10 @@
       else height = newHeight;
     }
     mergeView.wrap.style.height = height + "px";
-  }*/
+  }
 
 	visual_editor.core.initialize("<%= j raw @commit.as_json %>", false);
+
+  */
 
 <% end %>

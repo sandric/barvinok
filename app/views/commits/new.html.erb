@@ -3,11 +3,8 @@
 
 <%= render 'form' %>
 
-<div id="visual-editor">
-</div>
 
-<div id="editor">
-</div>
+<%= react_component('VisualEditor', data: raw(@commit.as_json), editing: true) %>
 
 
 <%= javascript_tag do %>
@@ -78,7 +75,7 @@
     }
     mergeView.wrap.style.height = height + "px";
   }
-*/
-  visual_editor.core.initialize("<%= j raw @commit.as_json %>", false);
+
+  visual_editor.core.initialize("<%= j raw @commit.as_json %>", false);*/
 
 <% end %>

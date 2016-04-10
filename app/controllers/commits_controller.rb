@@ -48,6 +48,8 @@ class CommitsController < ApplicationController
 
 	def fork
 
+		p "IN DAT HAOUUUUUSE"
+
 		forked_keyboard = Keyboard.find_by_name(params[:keyboard_name])
 		forked_commit = Commit.find(params[:id])
 
