@@ -6,7 +6,7 @@ class VisualEditor extends React.Component {
 
 	componentDidMount () {
 
-		visual_editor.core.initialize(this.props.data, this.props.editing)
+		visual_editor.core.initialize(this.props.data, this.props.editable)
 	}
 
 	render () {

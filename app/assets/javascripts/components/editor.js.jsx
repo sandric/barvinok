@@ -2,23 +2,50 @@ class Editor extends React.Component {
 
 	constructor () {
 		super()
+	
+		this.state = {
+    		display: 'visual'
+    	}
 	}
 
 	componentDidMount () {
-   
-		this.editor = CodeMirror(editorElement, {
-	        value: JSON.stringify(JSON.parse(this.props.originalData), null, 2),
-	        lineNumbers: true,
-	        mode: "application/ld+json",
-	        readOnly: !this.props.editable
-	    });
+    
+	}
+
+	toggleDisplay (event) {
+
+		if (this.state.display == 'visual') {
+			this.state.display = 'textual'
+		} else {
+			this.state.display = 'visual'
+		}
+
+		this.setState(this.state)
+
+		event.stopPropagation();
 	}
 
 	render () {
 
 		return (
 
-			<div id="editor"></div>
+			<div class="editor">
+
+				<button type="button" onClick={this.toggleDisplay.bind(this)}> 
+					{this.state.display == 'visual' ? 'textual' : 'visual'} 
+				</button>
+
+				{this.state.display == 'visual' ? 
+					<VisualEditor
+						data={this.props.data}
+						editable={this.props.editable}
+					/> : 
+					<TextualEditor
+						data={this.props.data}
+						editable={this.props.editable}
+					/>
+				}
+			</div>
 		)
 	}
 }
