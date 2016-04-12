@@ -64,13 +64,25 @@ first_keyboard.create_activity :unlike, owner: user_second
 second_keyboard.create_activity :like, owner: user
 third_keyboard.create_activity :like, owner: user_second
 
+user.follow(second_keyboard)
 second_keyboard.create_activity :follow, owner: user
+
+user.stop_following(second_keyboard)
 second_keyboard.create_activity :unfollow, owner: user
+
+user.follow(second_keyboard)
 second_keyboard.create_activity :follow, owner: user
 
 
+user_second.follow(user)
 user.create_activity :follow, owner: user_second
+
+user_second.stop_following(user)
 user.create_activity :unfollow, owner: user_second
+
+
+user.follow(user_second)
+user_second.create_activity :follow, owner: user
 
 
 

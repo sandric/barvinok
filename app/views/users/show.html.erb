@@ -25,9 +25,9 @@
 <% if @user != User.first %>
 
 	<% if User.first.following?(@user) %>
-		<%= link_to 'Unfollow', unfollow_user_path(@user.name), method: :patch %>
+		<%= button_to 'Unfollow', unfollow_user_path(@user.name), method: :patch %>
 	<% else %>
-		<%= link_to 'Follow', follow_user_path(@user.name), method: :patch %>
+		<%= button_to 'Follow', follow_user_path(@user.name), method: :patch %>
 	<% end %>
 
 <% end %>
