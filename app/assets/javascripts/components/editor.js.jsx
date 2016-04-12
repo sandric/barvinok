@@ -15,6 +15,8 @@ class Editor extends React.Component {
     		this.saveChanges()
     		return this.state.changes 
     	}
+
+    	window.editor = this
 	}
 
 	getChanges () {
@@ -35,6 +37,14 @@ class Editor extends React.Component {
 		}
 	}
 
+	addLayer (layer) {
+
+		parsed_changes = JSON.parse(this.state.changes)
+		parsed_changes.layers.push(layer)
+
+		this.setState({changes: JSON.stringify(parsed_changes)})		
+	}
+
 	toggleDisplay (event) {
 
 		this.saveChanges()
@@ -47,7 +57,7 @@ class Editor extends React.Component {
 		event.stopPropagation()
 	}
 
-	getOptions (input, callback) {
+	getAutosuggestionOptions (input, callback) {
 
 		if (!input)
 			return callback(null, { 
@@ -61,7 +71,7 @@ class Editor extends React.Component {
 		else
 		  	return fetch(`/layers.json?q=${input}`)
 		    	.then((response) => {
-		      		return response.json();
+		      		return response.json()
 		    	}).then((json) => {
 		    		return { 
 		    			options: json.map(function(path) {
@@ -71,6 +81,15 @@ class Editor extends React.Component {
 		    	});
 	}
 
+	onAutosuggestionChange (value) {
+		fetch(value.value)
+	    	.then((response) => {
+	      		return response.json()
+	    	}).then((json) => {
+	    		this.addLayer(json)
+	    	});
+	}
+
 
 	render () {
 
@@ -78,12 +97,14 @@ class Editor extends React.Component {
 
 			<div class="editor">
 
-				<Select.Async
-				    name="form-field-name"
-				    loadOptions={this.getOptions}
-				/>
+				{this.props.editable ?
+					<Select.Async
+					    name="form-field-name"
+					    loadOptions={this.getAutosuggestionOptions}
+					    onChange={this.onAutosuggestionChange.bind(this)}
+					/>:null}
 
-				<button type="button" onClick={this.toggleDisplay.bind(this)}> 
+				<button type="button" onClick={this.toggleDisplay.bind(this)}>
 					{this.state.display == 'visual' ? 'textual' : 'visual'} 
 				</button>
 

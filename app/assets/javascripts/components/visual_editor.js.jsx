@@ -13,6 +13,11 @@ class VisualEditor extends React.Component {
 		visual_editor.core.initialize(this.props.data, this.props.editable)
 	}
 
+	componentDidUpdate () {
+
+		visual_editor.core.initialize(this.props.data, this.props.editable)
+	}
+
 	render () {
 
 		return (

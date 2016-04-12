@@ -34,20 +34,15 @@ class TextualEditor extends React.Component {
     }
 
     getValue () {
-
-    	console.log("getting:")
-
-    	console.log(this.editor.editor().getValue())
-
     	if (this.props.changes)
     		return this.editor.editor().getValue()
     	else 
     		return this.editor.getValue()
     }
 
-	componentDidMount () {
+    initializeCodeMirror () {
 
-		if (this.props.changes) {
+    	if (this.props.changes) {
 
 			this.editor = CodeMirror.MergeView(document.getElementById("textual-editor"), {
 				orig: JSON.stringify(JSON.parse(this.props.data), null, 2),
@@ -70,6 +65,14 @@ class TextualEditor extends React.Component {
 		        readOnly: !this.props.editable
 		    });
 		}
+    }
+
+	componentDidMount () {
+		this.initializeCodeMirror()
+	}
+
+	componentDidUpdate () {
+		this.initializeCodeMirror()
 	}
 
 	render () {

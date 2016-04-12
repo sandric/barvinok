@@ -14,7 +14,9 @@
 // require jquery_ujs
 //= require turbolinks
 
-//= require react
+//= require cljs/visual-editor-min
+
+// require react
 //= require react_ujs
 //= require components
 
@@ -31,9 +33,6 @@
 
 //= require markdown
 //= require javascript
-
-// require cljs/visual-editor-min
-
 
 
 //= require_tree .
