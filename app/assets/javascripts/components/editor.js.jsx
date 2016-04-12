@@ -47,11 +47,41 @@ class Editor extends React.Component {
 		event.stopPropagation()
 	}
 
+	getOptions (input, callback) {
+
+		if (!input)
+			return callback(null, { 
+				options: [
+			    	{ value: '/base/empty', label: '/base/empty' },
+			    	{ value: '/base/qwerty', label: '/base/qwerty' },
+			    	{ value: '/base/dvorak', label: '/base/dvorak' },
+			    	{ value: '/base/colemak', label: '/base/colemak' },
+				]
+			});
+		else
+		  	return fetch(`/layers.json?q=${input}`)
+		    	.then((response) => {
+		      		return response.json();
+		    	}).then((json) => {
+		    		return { 
+		    			options: json.map(function(path) {
+							return { value: path, label: path }
+						})
+		    		}
+		    	});
+	}
+
+
 	render () {
 
 		return (
 
 			<div class="editor">
+
+				<Select.Async
+				    name="form-field-name"
+				    loadOptions={this.getOptions}
+				/>
 
 				<button type="button" onClick={this.toggleDisplay.bind(this)}> 
 					{this.state.display == 'visual' ? 'textual' : 'visual'} 

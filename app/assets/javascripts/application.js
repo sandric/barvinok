@@ -18,6 +18,11 @@
 //= require react_ujs
 //= require components
 
+//= require classnames
+//= require react-input-autoresize
+//= require react-select
+
+
 //= require marked.min
 
 //= require codemirror
@@ -27,7 +32,7 @@
 //= require markdown
 //= require javascript
 
-//= require cljs/visual-editor-min
+// require cljs/visual-editor-min
 
 
 
