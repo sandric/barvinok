@@ -1,28 +1,50 @@
 class Editor extends React.Component {
 
-	constructor () {
-		super()
-	
+	constructor (props) {
+		super(props)
+
 		this.state = {
     		display: 'visual'
     	}
+
+    	if (props.editable)
+    		this.state.changes = props.data
+
+
+    	window.getEditorChanges = () => {
+    		this.saveChanges()
+    		return this.state.changes 
+    	}
 	}
 
-	componentDidMount () {
-    
+	getChanges () {
+		this.saveChanges()
+		return this.state.changes
+	}
+
+	saveChanges () {
+
+		if (this.state.display == 'visual') {
+			if (this.props.editable) {
+				this.setState({changes: this.refs.VisualEditor.getValue()})
+			}
+		} else {
+			if (this.props.editable) {
+				this.setState({changes: this.refs.TextualEditor.getValue()})
+			}
+		}
 	}
 
 	toggleDisplay (event) {
 
-		if (this.state.display == 'visual') {
-			this.state.display = 'textual'
-		} else {
-			this.state.display = 'visual'
-		}
+		this.saveChanges()
 
-		this.setState(this.state)
+		if (this.state.display == 'visual')
+			this.setState({display: 'textual'})
+		else
+			this.setState({display: 'visual'})
 
-		event.stopPropagation();
+		event.stopPropagation()
 	}
 
 	render () {
@@ -36,14 +58,29 @@ class Editor extends React.Component {
 				</button>
 
 				{this.state.display == 'visual' ? 
-					<VisualEditor
-						data={this.props.data}
-						editable={this.props.editable}
-					/> : 
-					<TextualEditor
-						data={this.props.data}
-						editable={this.props.editable}
-					/>
+					this.props.editable ?
+						<VisualEditor
+							ref="VisualEditor"
+							data={this.state.changes}
+							editable={this.props.editable}
+						/> : 
+						<VisualEditor
+							ref="VisualEditor"
+							data={this.props.data}
+							editable={this.props.editable}
+						/> :
+					this.props.editable ?
+						<TextualEditor
+							ref="TextualEditor"
+							data={this.props.data}
+							changes={this.state.changes}
+							editable={this.props.editable}
+						/> :
+						<TextualEditor
+							ref="TextualEditor"
+							data={this.props.data}
+							editable={this.props.editable}
+						/>
 				}
 			</div>
 		)

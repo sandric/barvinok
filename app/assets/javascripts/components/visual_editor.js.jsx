@@ -4,6 +4,10 @@ class VisualEditor extends React.Component {
 		super()
 	}
 
+   getValue () {
+    	return visual_editor.db.serialize_keyboard()
+    }
+
 	componentDidMount () {
 
 		visual_editor.core.initialize(this.props.data, this.props.editable)

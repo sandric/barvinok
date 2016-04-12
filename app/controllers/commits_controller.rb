@@ -31,9 +31,15 @@ class CommitsController < ApplicationController
 
 		attributes = commit_params
 
-		attributes[:layers_attributes] = JSON.parse(attributes[:layers])
-		attributes.delete(:layers)
+		layers = JSON.parse(attributes[:layers])
 
+		attributes[:layers_attributes] = layers["layers"].map do |layer| 
+			layer["vid"] = layer.delete("id") 			
+			layer["layout"] = JSON.generate(layer["layout"])
+			layer
+		end
+
+		attributes.delete(:layers)
 
 		@commit = Commit.new(attributes)
 
@@ -47,8 +53,6 @@ class CommitsController < ApplicationController
 	end
 
 	def fork
-
-		p "IN DAT HAOUUUUUSE"
 
 		forked_keyboard = Keyboard.find_by_name(params[:keyboard_name])
 		forked_commit = Commit.find(params[:id])

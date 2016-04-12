@@ -1,6 +1,6 @@
 class Commit < ActiveRecord::Base
 	include PublicActivity::Model
-  	tracked only: [:create, :update], owner: proc {|controller, model| model.keyboard.user }
+  	tracked only: [:create], owner: proc {|controller, model| model.keyboard.user }
   	
 	acts_as_tree
 	

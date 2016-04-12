@@ -10,6 +10,8 @@
   <%= f.hidden_field :layers %>
 
 
-  <%= f.submit name: "submit" %>
+  <%= f.submit name: "submit", :onclick => "document.getElementById('commit_layers').value = getEditorChanges()" %>
 
 <% end %>
+
+<%= react_component('Editor', data: raw(@commit.as_json), editable: true) %>
