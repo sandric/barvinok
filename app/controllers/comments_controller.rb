@@ -1,21 +1,6 @@
 class CommentsController < ApplicationController
 	include CommentHelper
 
-	def new
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-		@talk = Talk.find(params[:talk_id])
-
-		@comment = Comment.new
-	end
-
-	def edit
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-		@talk = Talk.find(params[:talk_id])
-
-		@comment = Comment.find(params[:id])
-	end
 
 	def create
 		@user = User.find_by_name(params[:user_name])
@@ -34,7 +19,6 @@ class CommentsController < ApplicationController
 		end
 	end
 
-
 	def update
 		@user = User.find_by_name(params[:user_name])
 		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
@@ -48,7 +32,6 @@ class CommentsController < ApplicationController
 		    render 'edit'
 		end
   	end
-
 
   	def destroy
   		@user = User.find_by_name(params[:user_name])

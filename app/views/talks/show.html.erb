@@ -2,12 +2,10 @@
 
 <%= link_to 'Delete', user_keyboard_talk_path(@user.name, @keyboard.name, @talk), method: :delete, data: { confirm: 'Are you sure?' } %>
 
-<%= link_to 'Add Comment', new_user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk) %>
-
 
 <h1> <%= j @talk.title %> </h1>
 
-<%= react_component('Markdown', data: @talk.data) %>
+<%= react_component('MarkdownEditor', data: @talk.data, editable: false) %>
 
 
 <% @talk.comments.each do |comment| %>
@@ -15,11 +13,11 @@
 		<div class="head">
 			Created by: <b><%= comment.user.name %></b>
 
-			<%= link_to 'Delete', user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
-
-			<%= link_to 'Edit', edit_user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment) %> 
+			<%= button_to 'Delete', user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
 		</div>
 		
-		<%= react_component('Markdown', data: comment.data) %>
+		<%= react_component('Comment', user: @user, keyboard: @keyboard, talk: @talk, comment: comment, action: :edit, authenticity_token: form_authenticity_token) %>
 	</div>
 <% end %>
+
+<%= react_component('Comment', user: @user, keyboard: @keyboard, talk: @talk, comment: @comment, action: :new, authenticity_token: form_authenticity_token) %>

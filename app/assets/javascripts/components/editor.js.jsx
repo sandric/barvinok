@@ -15,8 +15,6 @@ class Editor extends React.Component {
     		this.saveChanges()
     		return this.state.changes 
     	}
-
-    	window.editor = this
 	}
 
 	getChanges () {

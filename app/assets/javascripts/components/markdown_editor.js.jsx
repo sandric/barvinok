@@ -4,39 +4,50 @@ class MarkdownEditor extends React.Component {
 		super(props)
 
 		this.state = {
-			mode: 'editing',
-			data: this.props.data
+			mode: this.props.mode || 'preview',
+			changes: this.props.data || ""
 		}
+
+		window.getMarkdownEditorChanges = () => {
+    		return this.getChanges()
+    	}
 	}
 
 	componentDidMount () {
+		if (this.props.editable)
+			this.initializeCodeMirror()	      
+	}
 
-		this.editor = CodeMirror.fromTextArea(document.getElementById(`${this.props.model}_${this.props.field}`), {
-  			value: this.state.data,
-  			mode:  "markdown",
-  			lineNumbers: true,
-  		});
+	getChanges () {
+		return this.state.changes
+	}
+
+	initializeCodeMirror () {
+
+  		this.editor = CodeMirror(this.refs.MarkdownEditor, {
+	        value: this.state.changes,
+	        mode: "markdown",
+	        lineNumbers: true
+		});
 
 		this.editor.on('change', () => {
-			this.editor.save()
-
-    		this.state.data = document.getElementById(`${this.props.model}_${this.props.field}`).value;
-    		this.setState(this.state)
+    		this.setState({changes: this.editor.getValue()})
 		});
 	}
 
 	toggleMode (event) {
-		if (this.state.mode == 'editing') {
-			this.state.mode = 'previewing'
-			this.editor.getWrapperElement().style.display = 'none';
+
+		if (this.state.mode == 'edit') {
+			this.setState({mode: 'preview'})
 		} else {
-			this.state.mode = 'editing'
-			this.editor.getWrapperElement().style.display = 'block';
+			this.setState({mode: 'edit'})
 		}
 
-		this.setState(this.state)
-
 		event.stopPropagation();
+	}
+
+	generateMarkup () { 
+		return {__html: marked(this.state.changes)} 
 	}
 
 
@@ -44,24 +55,19 @@ class MarkdownEditor extends React.Component {
 
 		return (
 
-			<div className="markdown_editor">
+			<div className="markdown-editor">
 
-				<button type="button" onClick={this.toggleMode.bind(this)}> 
-					{this.state.mode == 'editing' ? 'preview' : 'edit'} 
-				</button>
+				{this.props.editable ?
 
-				<textarea 
-					name={this.props.model + '[' + this.props.field + ']'}
-					id={this.props.model + '_' + this.props.field} 
-					style={{display: 'none'}} 
-					value={this.state.data} 
-					readOnly>
-				</textarea>
+					<button type="button" onClick={this.toggleMode.bind(this)}> 
+						{this.state.mode == 'edit' ? 'preview' : 'edit'} 
+					</button> : null}
 
-				<Markdown 
-					hidden={this.state.mode == 'editing'}
-					data={this.state.data}
-				/>
+					<div className={this.state.mode == 'preview' ? 'hidden' : ''} ref="MarkdownEditor"></div> 
+
+					<div className={this.state.mode == 'preview' ? 'markdown' : 'hidden'}
+						dangerouslySetInnerHTML={this.generateMarkup()}>
+					</div>
 			</div>
 		)
 	}

@@ -19,6 +19,8 @@ class TalksController < ApplicationController
 		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
 
 		@talk = Talk.find(params[:id])
+
+		@comment = Comment.new
 	end
 
 	def edit
