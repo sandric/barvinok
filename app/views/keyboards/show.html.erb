@@ -34,4 +34,4 @@
 
 <h1> <%= j @keyboard.name %> </h1>
 
-<%= react_component('Markdown', data: @keyboard.description) %>
+<%= react_component('MarkdownEditor', data: @keyboard.description, editable: false) %>
