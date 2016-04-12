@@ -9,10 +9,10 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
-// require jquery
-// require jquery_ujs
+
 //= require turbolinks
+
+//= require refile
 
 //= require cljs/visual-editor-min
 
@@ -36,3 +36,17 @@
 
 
 //= require_tree .
+
+
+
+document.addEventListener("turbolinks:request-start", function(){
+  
+  //console.log("before")
+  //document.getElementsByTagName("body")[0].className = "animated shake"
+});
+
+document.addEventListener("turbolinks:load", function(){
+  
+  //console.log("load")
+  //document.getElementsByTagName("body")[0].className = ""
+});

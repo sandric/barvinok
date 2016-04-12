@@ -17,7 +17,13 @@
 
  *= require react-select.css
 
+ *= require animate.min.css
+
 
  *= require_tree .
  *= require_self
  */
+
+body {
+	-webkit-animation-iteration-count: infinite;
+}
