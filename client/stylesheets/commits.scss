@@ -1,0 +1,21 @@
+form.new_commit {
+	width: 100%;
+	margin: 20px auto;
+
+	input {
+		display: block;
+		width: 100%;
+		margin: 10px;
+
+		&[type="submit"] {
+			width: auto;
+			margin: 0 auto;
+		}
+	}
+
+	textarea {
+		display: block;
+		width: 100%;
+		margin: 10px;
+	}
+}
