@@ -9,4 +9,8 @@
 
 <%= devise_error_messages! %>
 
-<%= react_component('User', user: resource, avatar_field: avatar_field, action: :edit, authenticity_token: form_authenticity_token) %> 
+<%= react_component('User', 'user_update',
+	user: resource,
+	avatar_field: avatar_field,
+	action: 'edit',
+	authenticity_token: form_authenticity_token) %>

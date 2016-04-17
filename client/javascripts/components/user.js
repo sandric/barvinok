@@ -66,7 +66,7 @@ export default class User extends React.Component {
 
 
 	generateAvatarFieldMarkup () {
-		return {__html: marked(this.props.avatar_field)}
+		return {__html: this.props.avatar_field}
 	}
 
 
