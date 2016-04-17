@@ -9,8 +9,8 @@ export default class Talk extends React.Component {
 		super(props)
 
 		this.state = {
-			changes: props.talk.data,
-			title: props.talk.title
+			changes: props.talk.data || "",
+			title: props.talk.title || ""
 		}
 	}
 
@@ -50,7 +50,7 @@ export default class Talk extends React.Component {
 
 					<input type="hidden" name="authenticity_token" value={this.props.authenticity_token}/>
 
-					<input type="text" value={this.state.title} name="talk[title]" onChange={this.onChangeTitle.bind(this)}/>
+					<input type="{this.props.action == 'new' ? 'text' : 'hidden'}" value={this.state.title} name="talk[title]" onChange={this.onChangeTitle.bind(this)}/>
 
 					<input type="hidden" value={this.state.changes} name="talk[data]"/>
 

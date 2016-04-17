@@ -1,7 +1,7 @@
 <div>
 
 	<h3>Your liked keyboards: </h3>
-	
+
 	<% @user.find_liked_items.each do |liked_keyboard| %>
 		<div>
 			<%= link_to "#{@user.name}/#{liked_keyboard.name}", user_keyboard_path(@user.name, liked_keyboard.name)  %>

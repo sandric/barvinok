@@ -1,21 +1,4 @@
-//import User from './components/user'
-
-//import Keyboard from './components/keyboard'
-
-//import Talk from './components/talk'
-
-//import MarkdownEditor from './components/comment'
-
-
-//import Editor from './components/editor'
-
-
-//require("expose?React!react")
-
-//require('expose?Talk!./components/talk').default
-
-//require('expose?Comment!./components/comment').default
-
+import './refile'
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -28,7 +11,3 @@ window.renderReact = function(componentName, id, props) {
   var component = require(`./components/${componentUnderscoreName}`);
   ReactDOM.render(React.createElement(component, props), document.getElementById(id));
 }
-
-
-
-//import './refile'

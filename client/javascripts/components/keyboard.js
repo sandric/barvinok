@@ -9,8 +9,8 @@ export default class Keyboard extends React.Component {
 		super(props)
 
 		this.state = {
-			changes: props.keyboard.description,
-			name: props.keyboard.name
+			changes: props.keyboard.description || "",
+			name: props.keyboard.name || ""
 		}
 	}
 

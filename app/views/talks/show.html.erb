@@ -6,8 +6,7 @@
 <h1> <%= j @talk.title %> </h1>
 
 
-<% props = "{data: '#{@talk.data}', editable: false}" %>
-<%= client('MarkdownEditor', 'markdown_editor', props)%>
+<%= react_component('MarkdownEditor', "markdown_editor", data: @talk.data) %>
 
 
 <% @talk.comments.each do |comment| %>
@@ -18,25 +17,21 @@
 			<%= button_to 'Delete', user_keyboard_talk_comment_path(@user.name, @keyboard.name, @talk, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
 		</div>
 
-		<% props = "{
-			user: #{@user.to_json},
-			keyboard: #{@keyboard.to_json},
-			talk: #{@talk.to_json},
-			comment: #{comment.to_json},
+		<%= react_component('Comment', "edit_#{comment.id}_comment",
+			user: @user,
+			keyboard: @keyboard,
+			talk: @talk,
+			comment: comment,
 			action: 'edit',
-			authenticity_token: '#{form_authenticity_token}'}" %>
-
-		<%= client('Comment', "edit_#{comment.id}_comment", props)%>
+			authenticity_token: form_authenticity_token) %>
 
 	</div>
 <% end %>
 
-<% props = "{
-	user: #{@user.to_json},
-	keyboard: #{@keyboard.to_json},
-	talk: #{@talk.to_json},
-	comment: #{@comment.to_json},
-	action: 'new',
-	authenticity_token: '#{form_authenticity_token}'}" %>
-
-<%= client('Comment', 'new_comment', props)%>
+<%= react_component('Comment', "new_comment",
+			user: @user,
+			keyboard: @keyboard,
+			talk: @talk,
+			comment: @comment,
+			action: 'new',
+			authenticity_token: form_authenticity_token) %>

@@ -1,16 +1,16 @@
 module ReactHelper
-  def client(component, id, props)
-    sc = script(component, id, props)
-    "<div id='#{id}'></div>#{sc}".html_safe
+  def react_component(component, id, props)
+    script = generate_script(component, id, props)
+    "<div id='#{id}'></div>#{script}".html_safe
   end
 
 
   private
 
-  def script(component, id, props)
+  def generate_script(component, id, props)
     "<script>
       document.addEventListener('DOMContentLoaded', function(ev) {
-        renderReact('#{component}', '#{id}', #{props});
+        renderReact('#{component}', '#{id}', #{props.to_json});
       });
     </script>"
   end

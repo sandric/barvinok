@@ -52,7 +52,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 
 
 gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git"
-gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master' 
+gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
 gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'rails_admin', git: 'git@github.com:sandric/rails_admin.git'
 
@@ -60,9 +60,6 @@ gem 'rails_admin', git: 'git@github.com:sandric/rails_admin.git'
 gem 'sinatra', github: 'sinatra/sinatra'
 gem "refile", git: 'git@github.com:refile/refile.git', require: "refile/rails"
 gem "refile-mini_magick"
-
-
-gem 'react-rails', '~> 1.6.0'
 
 
 group :development, :test do

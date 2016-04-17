@@ -1,7 +1,7 @@
 <div>
 
 	<h3>Users liked keyboard: </h3>
-	
+
 	<% @likers.each do |liker| %>
 		<div>
 			<%= link_to liker.name, user_path(liker.name) %>

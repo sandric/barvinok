@@ -1,1 +1,6 @@
-<%= react_component('Talk', user: @user, keyboard: @keyboard, talk: @talk, action: :new, authenticity_token: form_authenticity_token) %>
+<%= react_component('Talk', "new_talk",
+	user: @user,
+	keyboard: @keyboard,
+	talk: @talk,
+	action: 'new',
+	authenticity_token: form_authenticity_token) %>

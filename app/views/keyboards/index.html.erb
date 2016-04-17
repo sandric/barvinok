@@ -5,10 +5,10 @@
 
 <ul>
 	<% @keyboards.each do |keyboard| %>
-		<li> 
-			<%= link_to keyboard.name, user_keyboard_path(@user.name, keyboard.name) %> 
+		<li>
+			<%= link_to keyboard.name, user_keyboard_path(@user.name, keyboard.name) %>
 
-			<%= link_to 'Edit', edit_user_keyboard_path(@user.name, keyboard.name) %> 
+			<%= link_to 'Edit', edit_user_keyboard_path(@user.name, keyboard.name) %>
 
 			<%= button_to 'Delete', user_keyboard_path(@user.name, keyboard.name), method: :delete, data: { confirm: 'Are you sure?' } %>
 
