@@ -14,4 +14,4 @@
 
 <% end %>
 
-<%= react_component('Editor', data: raw(@commit.as_json), editable: true) %>
+<%= react_component('Editor', 'editor', data: raw(@commit.as_json), editable: true) %>

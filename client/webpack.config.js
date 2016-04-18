@@ -75,6 +75,10 @@ module.exports = {
       name: 'common'
     }),
 
-    new ExtractTextPlugin('css/main.css')
+    new ExtractTextPlugin('css/main.css'),
+
+    new CopyWebpackPlugin([
+      { from: './visual-editor/resources/public/visual-editor-min.js', to: 'js/visual-editor-min.js' }
+    ])
   ]
 }

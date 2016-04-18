@@ -1,9 +1,11 @@
 import React from 'react';
 
+
 import CodeMirror from 'codemirror/lib/codemirror';
 
+import 'codemirror/mode/markdown/markdown.js';
+
 import "codemirror/lib/codemirror.css"
-import "codemirror/addon/merge/merge.css"
 
 
 import Marked from 'marked';
@@ -37,8 +39,7 @@ export default class MarkdownEditor extends React.Component {
 
   		this.editor = CodeMirror(this.refs.MarkdownEditor, {
 	        value: this.state.changes,
-	        mode: "markdown",
-	        lineNumbers: true
+	        mode: "markdown"
 		});
 
 		this.editor.on('change', () => {

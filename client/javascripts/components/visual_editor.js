@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export default class VisualEditor extends React.Component {
 
 	constructor () {

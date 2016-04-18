@@ -3,6 +3,10 @@ import React from 'react';
 import VisualEditor from './visual_editor'
 import TextualEditor from './textual_editor'
 
+import Select from 'react-select';
+
+import 'react-select/dist/react-select.min.css';
+
 
 export default class Editor extends React.Component {
 
@@ -43,7 +47,7 @@ export default class Editor extends React.Component {
 
 	addLayer (layer) {
 
-		parsed_changes = JSON.parse(this.state.changes)
+		let parsed_changes = JSON.parse(this.state.changes)
 		parsed_changes.layers.push(layer)
 
 		this.setState({changes: JSON.stringify(parsed_changes)})

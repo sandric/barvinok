@@ -1,6 +1,16 @@
 import React from 'react';
 
+
 import CodeMirror from 'codemirror/lib/codemirror';
+
+import 'codemirror/addon/merge/merge.js';
+
+import 'codemirror/addon/merge/merge.css';
+
+import 'codemirror/mode/javascript/javascript.js';
+
+import 'codemirror/mode/markdown/markdown.js';
+
 
 export default class TextualEditor extends React.Component {
 
