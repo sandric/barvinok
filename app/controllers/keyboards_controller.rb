@@ -1,6 +1,6 @@
 class KeyboardsController < ApplicationController
 
-	protect_from_forgery :except => [:like, :unlike]
+	protect_from_forgery with: :exception, :except => [:like, :unlike, :follow, :unfollow]
 
 
 	def index
