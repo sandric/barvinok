@@ -8,9 +8,9 @@ window.DIFF_INSERT = DIFF_INSERT;
 window.DIFF_EQUAL = DIFF_EQUAL;
 
 
-
-import React from 'react';
-import ReactDOM from 'react-dom';
+require("expose?React!react");
+require("expose?ReactDOM!react-dom");
+require("expose?ReactDOMServer!react-dom/server");
 
 
 window.renderReact = function(componentName, id, props) {

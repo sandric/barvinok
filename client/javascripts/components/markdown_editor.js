@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 import CodeMirror from 'codemirror/lib/codemirror';
 
 import 'codemirror/mode/markdown/markdown.js';

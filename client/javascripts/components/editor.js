@@ -1,5 +1,3 @@
-import React from 'react';
-
 import VisualEditor from './visual_editor'
 import TextualEditor from './textual_editor'
 
