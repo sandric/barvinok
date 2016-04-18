@@ -4,7 +4,7 @@ class Layer < ActiveRecord::Base
 
 	def as_json
 		{
-			vid: self.vid,
+			id: self.vid,
 			name: self.name,
 			color: self.color,
 			layout: JSON.parse(self.layout)
@@ -40,15 +40,15 @@ class Layer < ActiveRecord::Base
 	end
 
 	def self.seed_users_layers_autosuggestions
-    	
-    	Layer.all.each do |layer|  	
+
+    	Layer.all.each do |layer|
 	      	path = Rails.application.routes.url_helpers
 	      		.user_keyboard_commit_layer_path(
-	      			layer.commit.keyboard.user.name, 
-	      			layer.commit.keyboard.name, 
-	      			layer.commit, 
+	      			layer.commit.keyboard.user.name,
+	      			layer.commit.keyboard.name,
+	      			layer.commit,
 	      			layer.name)
-	      	
+
 	      	self.seed_layer_autosuggestion(path)
     	end
   	end
@@ -73,7 +73,7 @@ class Layer < ActiveRecord::Base
 				{\"row\":1,\"column\":3,\"value\":\"\"},
 				{\"row\":1,\"column\":4,\"value\":\"\"},
 				{\"row\":1,\"column\":5,\"value\":\"\"},
-				{\"row\":1,\"column\":6,\"value\":\"\"},		
+				{\"row\":1,\"column\":6,\"value\":\"\"},
 				{\"row\":1,\"column\":7,\"value\":\"\"},
 				{\"row\":1,\"column\":8,\"value\":\"\"},
 				{\"row\":1,\"column\":9,\"value\":\"\"},
@@ -121,7 +121,7 @@ class Layer < ActiveRecord::Base
 				{\"row\":1,\"column\":3,\"value\":\"W\"},
 				{\"row\":1,\"column\":4,\"value\":\"E\"},
 				{\"row\":1,\"column\":5,\"value\":\"R\"},
-				{\"row\":1,\"column\":6,\"value\":\"T\"},		
+				{\"row\":1,\"column\":6,\"value\":\"T\"},
 				{\"row\":1,\"column\":7,\"value\":\"Y\"},
 				{\"row\":1,\"column\":8,\"value\":\"U\"},
 				{\"row\":1,\"column\":9,\"value\":\"I\"},
@@ -169,7 +169,7 @@ class Layer < ActiveRecord::Base
 				{\"row\":1,\"column\":3,\"value\":\"W\"},
 				{\"row\":1,\"column\":4,\"value\":\"E\"},
 				{\"row\":1,\"column\":5,\"value\":\"R\"},
-				{\"row\":1,\"column\":6,\"value\":\"T\"},		
+				{\"row\":1,\"column\":6,\"value\":\"T\"},
 				{\"row\":1,\"column\":7,\"value\":\"Y\"},
 				{\"row\":1,\"column\":8,\"value\":\"U\"},
 				{\"row\":1,\"column\":9,\"value\":\"I\"},
@@ -217,7 +217,7 @@ class Layer < ActiveRecord::Base
 				{\"row\":1,\"column\":3,\"value\":\"W\"},
 				{\"row\":1,\"column\":4,\"value\":\"E\"},
 				{\"row\":1,\"column\":5,\"value\":\"R\"},
-				{\"row\":1,\"column\":6,\"value\":\"T\"},		
+				{\"row\":1,\"column\":6,\"value\":\"T\"},
 				{\"row\":1,\"column\":7,\"value\":\"Y\"},
 				{\"row\":1,\"column\":8,\"value\":\"U\"},
 				{\"row\":1,\"column\":9,\"value\":\"I\"},

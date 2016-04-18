@@ -3,7 +3,7 @@ class CommitsController < ApplicationController
 	def index
 		@user = User.find_by_name(params[:user_name])
 		@keyboard = @user.keyboards.find_by_name(params[:keyboard_name])
-		
+
 		@commits = @keyboard.commits
 	end
 
@@ -33,8 +33,8 @@ class CommitsController < ApplicationController
 
 		layers = JSON.parse(attributes[:layers])
 
-		attributes[:layers_attributes] = layers["layers"].map do |layer| 
-			layer["vid"] = layer.delete("id") 			
+		attributes[:layers_attributes] = layers["layers"].map do |layer|
+			layer["vid"] = layer.delete("id")
 			layer["layout"] = JSON.generate(layer["layout"])
 			layer
 		end
@@ -44,7 +44,7 @@ class CommitsController < ApplicationController
 		@commit = Commit.new(attributes)
 
 		@commit.keyboard = @keyboard
-		
+
 		if @commit.save
 			redirect_to user_keyboard_commit_path(@user.name, @keyboard.name, @commit)
 		else
@@ -87,7 +87,7 @@ class CommitsController < ApplicationController
 
 
 
-	private 
+	private
 		def commit_params
     		params.require(:commit).permit(:name, :description, :parent_id, :layers)
   		end
