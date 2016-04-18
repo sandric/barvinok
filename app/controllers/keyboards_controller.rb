@@ -1,5 +1,8 @@
 class KeyboardsController < ApplicationController
 
+	protect_from_forgery :except => [:like, :unlike]
+
+
 	def index
 		@user = User.find_by_name(params[:user_name])
 		@keyboards = @user.keyboards
@@ -62,13 +65,20 @@ class KeyboardsController < ApplicationController
 
   	def like
 		@user = User.find_by_name(params[:user_name])
+
+		p @user
+
 		@keyboard = @user.keyboards.find_by_name(params[:name])
+
+		p @keyboard
+
 
 		@keyboard.liked_by User.first
 
 		@keyboard.create_activity :like, owner: User.first
 
-		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+
+		render json: {status: 200, likes: @keyboard.get_likes.size}
 	end
 
   	def unlike
@@ -79,7 +89,8 @@ class KeyboardsController < ApplicationController
 
 		@keyboard.create_activity :unlike, owner: User.first
 
-		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+
+		render json: {status: 200, likes: @keyboard.get_likes.size}
 	end
 
   	def destroy
@@ -101,7 +112,7 @@ class KeyboardsController < ApplicationController
 
 		@keyboard.create_activity :follow, owner: User.first
 
-		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+		render json: {status: 200, followers: @keyboard.count_user_followers}
 	end
 
 	def unfollow
@@ -112,7 +123,7 @@ class KeyboardsController < ApplicationController
 
 		@keyboard.create_activity :unfollow, owner: User.first
 
-		redirect_to user_keyboard_path(@user.name, @keyboard.name)
+		render json: {status: 200, followers: @keyboard.count_user_followers}
 	end
 
 

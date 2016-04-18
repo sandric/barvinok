@@ -36,7 +36,7 @@ Rails.application.routes.draw do
         patch :follow
         patch :unfollow
       end
-    
+
       resources :commits, :only => [:index, :show, :new, :create] do
         member do
           post :fork
@@ -49,6 +49,6 @@ Rails.application.routes.draw do
         resources :comments, :only => [:create, :update, :destroy]
       end
     end
-  end 
+  end
 
 end

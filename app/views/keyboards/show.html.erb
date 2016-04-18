@@ -16,18 +16,18 @@
 
 <% if @user != User.first %>
 
-	<% if @user.liked? @keyboard %>
-		<%= link_to 'Unlike', unlike_user_keyboard_path(@user.name, @keyboard.name), method: :patch %>
-	<% else %>
-		<%= link_to 'Like', like_user_keyboard_path(@user.name, @keyboard.name), method: :patch %>
-	<% end %>
 
+	<%= react_component('Like', "like",
+			liked: User.first.liked?(@keyboard),
+			likes: @keyboard.get_likes.size,
+			user: @user,
+			keyboard: @keyboard) %>
 
-	<% if User.first.following?(@keyboard) %>
-		<%= link_to 'Unfollow', unfollow_user_keyboard_path(@user.name, @keyboard.name), method: :patch %>
-	<% else %>
-		<%= link_to 'Follow', follow_user_keyboard_path(@user.name, @keyboard.name), method: :patch %>
-	<% end %>
+	<%= react_component('Follow', "follow",
+			follows: User.first.following?(@keyboard),
+			followers: @keyboard.count_user_followers,
+			user: @user,
+			keyboard: @keyboard) %>
 
 <% end %>
 
