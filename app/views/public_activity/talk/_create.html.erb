@@ -1,12 +1,14 @@
 <% if activity.trackable && activity.owner %>
 	<div>
-		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, [activity.owner]) %>
 
-  		created <%= link_to activity.trackable.title, user_keyboard_talk_path(activity.owner.name, activity.trackable.keyboard.name, activity.trackable) %> talk
+  		created
+  		<%= link_to(activity.trackable.title, [activity.owner, activity.trackable.keyboard, activity.trackable]) %>
+  		talk
   	</div>
 <% else %>
   	<div>
-		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, [activity.owner]) %>
 
   		created talk that does not exist anymore.
   	</div>

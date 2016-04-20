@@ -1,12 +1,13 @@
 <% if activity.trackable && activity.owner %>
 	<div>
-		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, [activity.owner]) %>
 
-  		unfollowed <%= link_to activity.trackable.name, user_keyboard_path(activity.owner.name, activity.trackable.name) %>
+  		unfollowed
+  		<%= link_to(activity.trackable.name, [activity.owner, activity.trackable] %>
   	</div>
 <% else %>
   	<div>
-		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, [activity.owner]) %>
 
   		unfollowed keyboard that does not exist anymore.
   	</div>

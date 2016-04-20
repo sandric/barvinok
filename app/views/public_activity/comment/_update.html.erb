@@ -2,11 +2,15 @@
 	<div>
 		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
 
-  		updated <%= link_to "Comment", show_comment_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk, activity.trackable) %> to <%= link_to activity.trackable.talk.title, user_keyboard_talk_path(activity.owner.name, activity.trackable.talk.keyboard.name, activity.trackable.talk) %> talk
+  		updated
+  		<%= link_to "Comment", [activity.owner, activity.trackable.talk.keyboard, activity.trackable.talk, activity.trackable] %>
+  		to
+  		<%= link_to activity.trackable.talk.title, [activity.owner, activity.trackable.talk.keyboard, activity.trackable.talk] %>
+  		talk
   	</div>
 <% else %>
   	<div>
-  		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, user_path(activity.owner.name)) %>
+  		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, [activity.owner]) %>
 
   		updated comment that does not exist anymore.
   	</div>
