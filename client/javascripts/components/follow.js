@@ -19,6 +19,8 @@ export default class Follow extends React.Component {
 
 	submit (event) {
 
+		let authenticityToken = document.querySelector('meta[name="csrf-token"]').content
+
 		let action = ''
 
 		if (this.props.keyboard) {
@@ -28,7 +30,15 @@ export default class Follow extends React.Component {
 		}
 
 		fetch(action, {
-			method: 'PATCH'
+			method: 'PATCH',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'X-CSRF-Token': authenticityToken,
+				'X-Requested-With': 'XMLHttpRequest'
+			},
+			body: {
+			}
 		})
     	.then((response) => {
       		return response.json()
