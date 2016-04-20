@@ -5,7 +5,7 @@
 
 <%= button_to 'Fork', [:fork, @user, @keyboard, @commit], :method => :post %>
 
-<%= link_to 'New Commit', [:new, @user, @keyboard] %>
+<%= link_to 'New Commit', [:new, @user, @keyboard, :commit] %>
 
 <%= link_to 'Diff', [:diff, @user, @keyboard, @commit] %>
 

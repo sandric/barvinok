@@ -2,10 +2,10 @@
 	<div>
 		<%= activity.owner == User.first ? "You" : link_to(activity.owner.name, [activity.owner]) %>
 
-  		added 
-  		<%= link_to activity.trackable.name, [activity.owner, activity.trackable.keyboard, activity.trackable] %> 
-  		commit to 
-  		<%= link_to activity.trackable.keyboard.name, [activity.owner, activity.trackable.keyboard] %> 
+  		added
+  		<%= link_to activity.trackable.name, [activity.owner, activity.trackable.keyboard, activity.trackable] %>
+  		commit to
+  		<%= link_to activity.trackable.keyboard.name, [activity.owner, activity.trackable.keyboard] %>
   		keyboard
   	</div>
 <% else %>

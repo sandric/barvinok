@@ -17,28 +17,27 @@ export default class Editor extends React.Component {
 
     	if (props.editable)
     		this.state.changes = props.data
-
-
-    	window.getEditorChanges = () => {
-    		this.saveChanges()
-    		return this.state.changes
-    	}
 	}
 
 	getChanges () {
-		this.saveChanges()
-		return this.state.changes
+		return this.saveChanges()
 	}
 
 	saveChanges () {
 
 		if (this.state.display == 'visual') {
 			if (this.props.editable) {
-				this.setState({changes: this.refs.VisualEditor.getValue()})
+				let changes = this.refs.VisualEditor.getValue()
+				this.setState({changes: changes})
+
+				return changes
 			}
 		} else {
 			if (this.props.editable) {
+				let changes = this.refs.TextualEditor.getValue()
 				this.setState({changes: this.refs.TextualEditor.getValue()})
+
+				return changes
 			}
 		}
 	}

@@ -11,9 +11,9 @@ class CommitsController < ApplicationController
 	end
 
 	def new
-		@commit = Commit.new(@keyboard.commits.last.attributes)
-		@commit.name = "New commit name"
-		@commit.description = "New commit description"
+		@parent_commit = Commit.new(@keyboard.commits.last.attributes)
+		@parent_commit.name = "New commit name"
+		@parent_commit.description = "New commit description"
 	end
 
 

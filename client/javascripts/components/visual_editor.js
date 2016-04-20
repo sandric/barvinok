@@ -5,7 +5,7 @@ export default class VisualEditor extends React.Component {
 	}
 
    getValue () {
-    	return visual_editor.db.serialize_keyboard()
+   		return visual_editor.db.serialize_keyboard()
     }
 
 	componentDidMount () {
