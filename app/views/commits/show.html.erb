@@ -3,11 +3,11 @@
 <h2><%= @commit.name %></h2>
 
 
-<%= button_to 'Fork', fork_user_keyboard_commit_path(@user.name, @keyboard.name, @commit), :method => :post %>
+<%= button_to 'Fork', [:fork, @user, @keyboard, @commit], :method => :post %>
 
-<%= link_to 'New Commit', new_user_keyboard_commit_path(@user.name, @keyboard.name) %>
+<%= link_to 'New Commit', [:new, @user, @keyboard] %>
 
-<%= link_to 'Diff', diff_user_keyboard_commit_path(@user.name, @keyboard.name, @commit) %>
+<%= link_to 'Diff', [:diff, @user, @keyboard, @commit] %>
 
 
 <%= react_component('Editor', 'editor', data: raw(@commit.as_json), editable: false) %>

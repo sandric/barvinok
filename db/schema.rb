@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404234214) do
+ActiveRecord::Schema.define(version: 20160419205940) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
@@ -61,6 +61,19 @@ ActiveRecord::Schema.define(version: 20160404234214) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables"
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows"
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -83,6 +96,7 @@ ActiveRecord::Schema.define(version: 20160404234214) do
     t.string  "name"
     t.text    "description"
     t.integer "user_id"
+    t.string  "slug"
   end
 
   add_index "keyboards", ["user_id"], name: "index_keyboards_on_user_id"
@@ -93,6 +107,7 @@ ActiveRecord::Schema.define(version: 20160404234214) do
     t.integer "vid"
     t.text    "layout"
     t.integer "commit_id"
+    t.string  "slug"
   end
 
   add_index "layers", ["commit_id"], name: "index_layers_on_commit_id"
@@ -120,10 +135,12 @@ ActiveRecord::Schema.define(version: 20160404234214) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "avatar_id"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true
 
   create_table "votes", force: :cascade do |t|
     t.string   "votable_type"

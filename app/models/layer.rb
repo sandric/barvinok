@@ -2,6 +2,10 @@ class Layer < ActiveRecord::Base
 
 	belongs_to :commit
 
+	extend FriendlyId
+	friendly_id :name, :use => :scoped, :scope => :commit
+
+
 	def as_json
 		{
 			id: self.vid,

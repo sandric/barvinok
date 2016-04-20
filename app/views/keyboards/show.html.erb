@@ -1,16 +1,16 @@
-<%= link_to 'Edit', edit_user_keyboard_path(@user.name, @keyboard.name) %>
+<%= link_to 'Edit', [:edit, @keyboard.user, @keyboard] %>
 
-<%= button_to 'Delete', user_keyboard_path(@user.name, @keyboard.name), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= button_to 'Delete', [@keyboard.user, @keyboard], method: :delete, data: { confirm: 'Are you sure?' } %>
 
-<%= link_to 'Commits', user_keyboard_commits_path(@user.name, @keyboard.name) %>
+<%= link_to 'Commits', [@keyboard.user, @keyboard, :commits] %>
 
-<%= link_to 'HEAD', user_keyboard_commit_path(@user.name, @keyboard.name, @keyboard.commits.last) %>
+<%= link_to 'HEAD', [@keyboard.user, @keyboard, @keyboard.commits.last] %>
 
-<%= link_to 'Talks', user_keyboard_talks_path(@user.name, @keyboard.name) %>
+<%= link_to 'Talks', [@keyboard.user, @keyboard, :talks] %>
 
-<%= link_to 'Likes', likes_user_keyboard_path(@user.name, @keyboard.name) %>
+<%= link_to 'Likes', [:likes, @keyboard.user, @keyboard] %>
 
-<%= link_to 'Followers', followers_user_keyboard_path(@user.name, @keyboard.name) %>
+<%= link_to 'Followers', [:followers, @keyboard.user, @keyboard] %>
 
 
 
@@ -20,13 +20,13 @@
 	<%= react_component('Like', "like",
 			liked: User.first.liked?(@keyboard),
 			likes: @keyboard.get_likes.size,
-			user: @user,
+			user: @keyboard.user,
 			keyboard: @keyboard) %>
 
 	<%= react_component('Follow', "follow",
 			follows: User.first.following?(@keyboard),
 			followers: @keyboard.count_user_followers,
-			user: @user,
+			user: @keyboard.user,
 			keyboard: @keyboard) %>
 
 <% end %>

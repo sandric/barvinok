@@ -1,20 +1,20 @@
 <h1>Keyboards</h1>
 
-<%= link_to 'Create new keyboard', new_user_keyboard_path(@user.name) %>
+<%= link_to 'Create new keyboard', [:new, @user, :keyboard] %>
 
 
 <ul>
 	<% @keyboards.each do |keyboard| %>
 		<li>
-			<%= link_to keyboard.name, user_keyboard_path(@user.name, keyboard.name) %>
+			<%= link_to keyboard.name, [@user, keyboard] %>
 
-			<%= link_to 'Edit', edit_user_keyboard_path(@user.name, keyboard.name) %>
+			<%= link_to 'Edit', [:edit, @user, keyboard] %>
 
-			<%= button_to 'Delete', user_keyboard_path(@user.name, keyboard.name), method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= button_to 'Delete', [@user, keyboard], method: :delete %>
 
-			<%= link_to 'Commits', user_keyboard_commits_path(@user.name, keyboard.name) %>
+			<%= link_to 'Commits', [@user, keyboard, :commits] %>
 
-			<%= link_to 'HEAD', user_keyboard_commit_path(@user.name, keyboard.name, keyboard.commits.last) %>
+			<%= link_to 'HEAD', [@user, keyboard, keyboard.commits.last] %>
 		</li>
 	<% end %>
 </ul>

@@ -7,27 +7,27 @@
 
 <% end %>
 
-<%= link_to 'Keyboards', user_keyboards_path(@user.name) %>
+<%= link_to 'Keyboards', [@user, :keyboards] %>
 
 
-<%= link_to 'Activity', activity_user_path(@user.name) %>
+<%= link_to 'Activity', [:activity, @user] %>
 
-<%= link_to 'Feed', feed_user_path(@user.name) %>
+<%= link_to 'Feed', [:feed, @user] %>
 
 
 
-<%= link_to 'Likes', likes_user_path(@user.name) %>
+<%= link_to 'Likes', [:likes, @user] %>
 
-<%= link_to 'Following', following_user_path(@user.name) %>
+<%= link_to 'Following', [:following, @user] %>
 
-<%= link_to 'Followers', followers_user_path(@user.name) %>
+<%= link_to 'Followers', [:followers, @user] %>
 
 <% if @user != User.first %>
 
 	<% if User.first.following?(@user) %>
-		<%= button_to 'Unfollow', unfollow_user_path(@user.name), method: :patch %>
+		<%= button_to 'Unfollow', [:unfollow, @user], method: :patch %>
 	<% else %>
-		<%= button_to 'Follow', follow_user_path(@user.name), method: :patch %>
+		<%= button_to 'Follow', [:follow, @user], method: :patch %>
 	<% end %>
 
 <% end %>

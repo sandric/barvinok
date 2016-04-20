@@ -1,4 +1,4 @@
-<%= form_for([@user, @keyboard, @commit], url: user_keyboard_commits_path(@user.name, @keyboard.name)) do |f| %>
+<%= form_for [@user, @keyboard, @commit], url: [@user, @keyboard, :commits] do |f| %>
 
   <%= f.text_field :name %>
 

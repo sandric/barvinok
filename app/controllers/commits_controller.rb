@@ -1,23 +1,16 @@
 class CommitsController < ApplicationController
 
-	def index
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = @user.keyboards.find_by_name(params[:keyboard_name])
+	before_filter :get_user_and_keyboard
+	before_filter :get_commit, :except => [:index, :new, :create]
 
+	def index
 		@commits = @keyboard.commits
 	end
 
 	def show
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = @user.keyboards.find_by_name(params[:keyboard_name])
-
-		@commit = @keyboard.commits.find(params[:id])
 	end
 
 	def new
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = @user.keyboards.find_by_name(params[:keyboard_name])
-
 		@commit = Commit.new(@keyboard.commits.last.attributes)
 		@commit.name = "New commit name"
 		@commit.description = "New commit description"
@@ -25,10 +18,6 @@ class CommitsController < ApplicationController
 
 
 	def create
-
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-
 		attributes = commit_params
 
 		layers = JSON.parse(attributes[:layers])
@@ -46,48 +35,48 @@ class CommitsController < ApplicationController
 		@commit.keyboard = @keyboard
 
 		if @commit.save
-			redirect_to user_keyboard_commit_path(@user.name, @keyboard.name, @commit)
+			redirect_to [@user, @keyboard, @commit]
 		else
 			render :new
 		end
 	end
 
 	def fork
-
-		forked_keyboard = Keyboard.find_by_name(params[:keyboard_name])
 		forked_commit = Commit.find(params[:id])
 
+		@forked_keyboard = @keyboard
+		@forked_keyboard.name = @keyboard.name + "'s fork"
+		@forked_keyboard.user = User.first
 
-		@keyboard = Keyboard.new
-
-		@keyboard.name = forked_keyboard.name + "'s fork"
-
-		@keyboard.user = User.first
-
-		initial_commit = Commit.create(name: "Initial commit forked from " + forked_commit.name, layers: forked_commit.layers, keyboard: @keyboard)
+		initial_commit = Commit.create(name: "Initial commit forked from " + forked_commit.name,
+			layers: forked_commit.layers,
+			keyboard: @forked_keyboard)
 
 		initial_commit.parent = forked_commit
 
-		@keyboard.commits << initial_commit
+		@forked_keyboard.commits << initial_commit
 
-		if @keyboard.save
-			redirect_to user_keyboard_path(@keyboard.user.name, @keyboard.name)
+		if @forked_keyboard.save
+			redirect_to [User.first, @keyboard]
 		else
 			render 'new'
 		end
 	end
 
 	def diff
-
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-		@commit = Commit.find(params[:id])
-
-		@parent_commit = @commit.parent
 	end
 
 
-
 	private
+		def get_user_and_keyboard
+			@user = User.friendly.find(params[:user_id])
+			@keyboard = @user.keyboards.friendly.find(params[:keyboard_id])
+  		end
+
+		def get_commit
+			@commit = @keyboard.commits.find(params[:id])
+  		end
+
 		def commit_params
     		params.require(:commit).permit(:name, :description, :parent_id, :layers)
   		end

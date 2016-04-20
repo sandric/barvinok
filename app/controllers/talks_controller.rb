@@ -1,46 +1,31 @@
 class TalksController < ApplicationController
 
-	def index
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
+	before_filter :get_user_and_keyboard
+	before_filter :get_talk, :except => [:index, :new, :create]
 
+
+	def index
 		@talks = @keyboard.talks
 	end
 
 	def new
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-
 		@talk = Talk.new
 	end
 
 	def show
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-
-		@talk = Talk.find(params[:id])
-
-		@comment = Comment.new
 	end
 
 	def edit
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-
-		@talk = Talk.find(params[:id])
 	end
 
 	def create
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-
 		@talk = Talk.new(talk_params)
 
 		@talk.keyboard = @keyboard
 		@talk.user = @user
 
 		if @talk.save
-			redirect_to user_keyboard_talk_path(@user.name, @keyboard.name, @talk)
+			redirect_to [@user, @keyboard, @talk]
 		else
 			render 'new'
 		end
@@ -48,13 +33,8 @@ class TalksController < ApplicationController
 
 
 	def update
-		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-
-		@talk = Talk.find(params[:id])
-
 		if @talk.update(talk_params)
-		    redirect_to user_keyboard_talk_path(@user.name, @keyboard.name, @talk)
+		    redirect_to [@user, @keyboard, @talk]
 		else
 		    render 'edit'
 		end
@@ -62,18 +42,22 @@ class TalksController < ApplicationController
 
 
   	def destroy
-  		@user = User.find_by_name(params[:user_name])
-		@keyboard = Keyboard.find_by_name(params[:keyboard_name])
-
-    	@talk = Talk.find(params[:id])
-    	
     	@talk.destroy
 
-    	redirect_to user_keyboard_talks_path(@user.name, @keyboard.name)
+    	redirect_to [@user, @keyboard]
   	end
 
 
   	private
+		def get_user_and_keyboard
+			@user = User.friendly.find(params[:user_id])
+			@keyboard = @user.keyboards.friendly.find(params[:keyboard_id])
+  		end
+
+		def get_talk
+			@talk = @keyboard.talks.find(params[:id])
+  		end
+
   		def talk_params
     		params.require(:talk).permit(:title, :data)
   		end

@@ -1,5 +1,5 @@
 <h1><%= @keyboard.name %></h1>
 
-<h2><%= @parent_commit.name %> .. <%= @commit.name %></h2>
+<h2><%= @commit.parent.name %> .. <%= @commit.name %></h2>
 
-<%= react_component('TextualEditor', 'textual-editor', data: raw(@parent_commit.as_json), changes: raw(@commit.as_json)) %>
+<%= react_component('TextualEditor', 'textual-editor', data: raw(@commit.parent.as_json), changes: raw(@commit.as_json)) %>
