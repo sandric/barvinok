@@ -12,7 +12,7 @@ qwerty_layout = "[
 		{\"row\":1,\"column\":3,\"value\":\"W\"},
 		{\"row\":1,\"column\":4,\"value\":\"E\"},
 		{\"row\":1,\"column\":5,\"value\":\"R\"},
-		{\"row\":1,\"column\":6,\"value\":\"T\"},		
+		{\"row\":1,\"column\":6,\"value\":\"T\"},
 		{\"row\":1,\"column\":7,\"value\":\"Y\"},
 		{\"row\":1,\"column\":8,\"value\":\"U\"},
 		{\"row\":1,\"column\":9,\"value\":\"I\"},

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+	protect_from_forgery with: :exception, :except => [:follow, :unfollow]
+
 	before_filter :get_user, :except => [:index]
 
 
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
 
 		@user.create_activity :follow, owner: User.first
 
-		redirect_to [@user]
+		render json: {status: 200, followers: @user.count_user_followers}
 	end
 
 	def unfollow
@@ -41,7 +43,7 @@ class UsersController < ApplicationController
 
 		@user.create_activity :unfollow, owner: User.first
 
-		redirect_to [@user]
+		render json: {status: 200, followers: @user.count_user_followers}
 	end
 
 

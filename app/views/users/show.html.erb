@@ -24,11 +24,10 @@
 
 <% if @user != User.first %>
 
-	<% if User.first.following?(@user) %>
-		<%= button_to 'Unfollow', [:unfollow, @user], method: :patch %>
-	<% else %>
-		<%= button_to 'Follow', [:follow, @user], method: :patch %>
-	<% end %>
+	<%= react_component('Follow', "follow",
+			follows: User.first.following?(@user),
+			followers: @user.count_user_followers,
+			user: @user) %>
 
 <% end %>
 

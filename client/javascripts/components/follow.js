@@ -18,7 +18,16 @@ export default class Follow extends React.Component {
 	}
 
 	submit (event) {
-		fetch(`/${this.props.user.name}/${this.props.keyboard.name}/${this.state.action}`, {
+
+		let action = ''
+
+		if (this.props.keyboard) {
+			action = `/${this.props.user.name}/${this.props.keyboard.name}/${this.state.action}`
+		} else {
+			action = `/${this.props.user.name}/${this.state.action}`
+		}
+
+		fetch(action, {
 			method: 'PATCH'
 		})
     	.then((response) => {
