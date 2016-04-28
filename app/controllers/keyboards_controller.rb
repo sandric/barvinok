@@ -84,6 +84,11 @@ class KeyboardsController < ApplicationController
 		render json: {status: 200, followers: @keyboard.count_user_followers}
 	end
 
+  def layout
+    respond_to do |format|
+      format.json { render json: @keyboard.commits.last.as_json }
+    end
+  end
 
   	private
 

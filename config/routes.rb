@@ -35,6 +35,8 @@ Rails.application.routes.draw do
         get :followers
         patch :follow
         patch :unfollow
+
+        get :layout
       end
 
       resources :commits, :only => [:index, :show, :new, :create] do

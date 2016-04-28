@@ -5,6 +5,8 @@ class Layer < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id :name, :use => :scoped, :scope => :commit
 
+	validates :name, presence: true
+
 
 	def as_json
 		{

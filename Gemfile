@@ -70,9 +70,22 @@ group :development, :test do
   gem 'byebug'
   gem "better_errors"
   gem "binding_of_caller"
+
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'rails-controller-testing'
+  gem 'spring-commands-rspec'
 end
 
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+	gem "faker"
+	gem "capybara"
+	gem "database_cleaner"
+	gem "launchy"
+	gem "selenium-webdriver"
 end
