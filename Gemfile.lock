@@ -270,6 +270,10 @@ GEM
       omniauth-oauth (~> 1.1)
     orm_adapter (0.5.0)
     os (0.9.6)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     public_activity (1.5.0)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -362,6 +366,7 @@ GEM
       jwt (~> 1.5)
       multi_json (~> 1.10)
     simple_oauth (0.3.1)
+    slop (3.6.0)
     spring (1.7.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -433,6 +438,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-twitter
+  pry
   public_activity
   puma
   rack-cors
